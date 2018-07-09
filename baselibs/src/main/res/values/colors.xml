@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="red">#FF2525</color>
+    <color name="whites">#FFFFFF</color>
+    <color name="white">#fff</color>
+    <color name="acid_blue">#3396fc</color>  <!--已替换为global_blue-->
+    <color name="acid_ysbs">#131313</color>
+    <color name="blue">#0f84b5</color>
+    <color name="grey">#777777</color>
+    <color name="titletext_color">#666666</color>
+    <color name="titlefocustext_color">#0e6d9b</color>
+    <color name="seperator_color">#666666</color>
+    <color name="menuback_color">#343434</color>
+    <color name="menuback_presscolor">#555555</color>
+
+    <color name="bottom_color">#0281df</color>
+    <color name="bottom_presscolor">#5fb63d</color>
+    <color name="bg_press_yellow">#FFE89D00</color>
+    <!-- 黑色 -->
+    <color name="aphle">#00000000</color>
+    <color name="title_bar_background">#01AEF0</color>
+
+
+    <color name="jhs">#f69240</color>
+    <color name="black">#ff000000</color>
+    <color name="dialog_bg">#88336699</color>
+    <color name="text_common">#333333</color>
+    <color name="gray_2">#ffdcdcdc</color>
+    <color name="orange">#ffffb400</color>
+    <color name="green">#008000</color>
+    <color name="background_color">#fff6f6f6</color>
+    <color name="link_text_color">#ff5c993d</color>
+
+    <color name="tab_text_color_normal">#666666</color>
+    <color name="tab_text_color_pressed">#01aef0</color>
+    <color name="top_bar_text_color">#fff</color>
+    <color name="top_bar_background_color">#3396fc</color>
+    <color name="tab_border_color">#e5e5e5</color>
+
+    <color name="number_picker_one_text_color">#aaa</color>
+    <color name="number_picker_two_text_color">#888</color>
+    <color name="number_picker_center_text_color">#01aef0</color>
+    <color name="number_picker_bg_normal">#ffe5e5e5</color>
+    <color name="number_picker_center_bg">#fff</color>
+    <color name="number_picker_border_color">#d2d2d2</color>
+
+    <color name="edit_color">#343434</color>
+    <color name="input_bottom_line_color">#CFCFCF</color>
+    <color name="list_item_text_color">#333333</color>
+    <color name="list_item_background_color">#F6F6F6</color>
+    <color name="item_block_color1">#53C6E6</color>
+    <color name="item_block_color2">#495f8c</color>
+    <color name="item_block_color3">#F0C50E</color>
+    <color name="item_block_color4">#E58021</color>
+    <color name="item_block_color5">#3799Da</color>
+    <color name="item_block_color6">#1ABD9B</color>
+    <color name="item_block_color7">#E74F3F</color>
+    <color name="item_block_color8">#2d3e50</color>
+    <color name="item_block_color9">#297fb6</color>
+    <color name="item_block_color10">#c1392b</color>
+    <color name="item_block_color11">#7f8c8f</color>
+    <color name="item_block_color12">#1d6478</color>
+    <color name="item_block_color13">#d25400</color>
+    <color name="item_block_color14">#ffcc56</color>
+    <color name="item_block_color15">#019875</color>
+    <color name="item_block_color16">#4b77be</color>
+    <color name="item_block_color17">#8a81c5</color>
+    <color name="item_block_color18">#674172</color>
+
+    <color name="dropdown_list_item_color">#fff</color>
+    <color name="ctrl_item_text_unable_color">#c3c3c3</color>
+
+    <color name="hot3">#ffff9600</color>
+
+    <color name="griditems_bg">#ffe8ecef</color>
+    <color name="commo_text_color">#ff333333</color>
+    <color name="line">#ffd3dde6</color>
+
+    <color name="result_view">#b0000000</color>
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="color_pressed">#10000000</color>
+    <color name="possible_result_points">#c0ffff00</color>
+
+
+    <color name="global_blue">#08A7D5</color>
+
+
+</resources>

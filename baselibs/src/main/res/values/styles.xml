@@ -1,0 +1,169 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="android:Theme">
+        <item name="android:windowTitleSize">50dp</item>
+        <item name="android:windowTitleBackgroundStyle">@style/Title_Style</item>
+    </style>
+
+    <!-- Has no title theme. -->
+    <style name="NoTitleActivityTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="Dialog" parent="android:style/Theme.Dialog">
+        <item name="android:background">#00000000</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
+
+    <style name="Title_Style">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Font_WhiteSize12">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="Font_WhiteSize14">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Font_WhiteSize18">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="Font_WhiteSize22">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="Font_BlackSize8">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="Font_BlackSize12">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="Font_BlackSize14">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Font_BlackSize16">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Font_BlackSize18">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="Font_GraySize14">
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Font_BlueSize14">
+        <item name="android:textColor">#0000ff</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Font_BlueSize12">
+        <item name="android:textColor">#add9ff</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Font_TitleGraySize12">
+        <item name="android:textColor">@color/titletext_color</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Font_TitleGraySize14">
+        <item name="android:textColor">@color/titletext_color</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Font_TitleBlueSize14">
+        <item name="android:textColor">@color/titlefocustext_color</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="style_catalog">
+        <item name="android:textColor">#607382</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:background">#d7eaf8</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="measure_text">
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="input_title_Style">
+        <item name="android:textColor">@color/acid_ysbs</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Dialog_Fullscreen">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">#19000000</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+
+    <!--APP内的横向居中按钮样式-->
+    <style name="style_common_center_horizontal_button">
+        <item name="android:clickable">true</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">#F3F3F3</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!--透明dialog-->
+    <style name="translucent_dialog" parent="android:style/Theme.Dialog">
+        <item name="android:background">@android:color/transparent</item> <!-- 设置自定义布局的背景透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <!-- checkbox -->
+    <style name="rect_checkbox" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/checkbox_rect</item>
+        <item name="android:textColor">@color/text_common</item>
+        <item name="android:paddingRight">20dp</item>
+    </style>
+
+    <style name="round_checkbox" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/checkbox_round</item>
+        <item name="android:textColor">@color/text_common</item>
+        <item name="android:paddingRight">20dp</item>
+    </style>
+</resources>

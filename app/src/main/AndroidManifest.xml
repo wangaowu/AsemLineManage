@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.unistrong.asemlinemanage">
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <application
+        android:name=".Application"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".login.LoginActivity"
+            android:theme="@style/NoTitleActivityTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".login.SplashActivity"
+            android:exported="true"
+            android:theme="@style/NoTitleActivityTheme" />
+        <activity
+            android:name=".index.MainActivity"
+            android:theme="@style/NoTitleActivityTheme" />
+        <activity
+            android:name=".settings.MySettingsActivity"
+            android:theme="@style/NoTitleActivityTheme" />
+        <activity
+            android:name=".houseinfo.HouseInfoActivity"
+            android:theme="@style/NoTitleActivityTheme" />
+        <activity
+            android:name=".mytask.MyTaskActivity"
+            android:theme="@style/NoTitleActivityTheme" />
+        <activity
+            android:name=".recordinfo.RecordHouseInfoActivity"
+            android:theme="@style/NoTitleActivityTheme" />
+        <activity
+            android:name=".recordinfo.AddImageActivity"
+            android:theme="@style/NoTitleActivityTheme" />
+        <activity
+            android:name=".updateinfo.UpdateHouseInfoActivity"
+            android:theme="@style/NoTitleActivityTheme" />
+        <activity
+            android:name=".settings.UpdateActivity"
+            android:theme="@style/NoTitleActivityTheme" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.unistrong.asemlinemanage.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+    </application>
+</manifest>

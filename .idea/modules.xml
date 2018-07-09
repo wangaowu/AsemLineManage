@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/AsemLineManage.iml" filepath="$PROJECT_DIR$/AsemLineManage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/baselibs/baselibs.iml" filepath="$PROJECT_DIR$/baselibs/baselibs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/locationlibs/locationlibs.iml" filepath="$PROJECT_DIR$/locationlibs/locationlibs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/picturelibs/picturelibs.iml" filepath="$PROJECT_DIR$/picturelibs/picturelibs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/requestlibs/requestlibs.iml" filepath="$PROJECT_DIR$/requestlibs/requestlibs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/scancodelibs/scancodelibs.iml" filepath="$PROJECT_DIR$/scancodelibs/scancodelibs.iml" />
+    </modules>
+  </component>
+</project>

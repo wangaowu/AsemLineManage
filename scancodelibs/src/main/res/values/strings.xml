@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">scancodelibs</string>
+    <string name="scan_text">请将要扫描的二维码放入框内进行扫描</string>
+</resources>
