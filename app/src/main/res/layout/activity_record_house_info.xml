@@ -10,105 +10,121 @@
             android:id="@+id/layout_title"
             layout="@layout/common_title_layout" />
 
-        <ScrollView
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/white">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/tv_none"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="10dp">
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:visibility="gone" />
 
-                <include
-                    android:id="@+id/blue_title"
-                    layout="@layout/common_form_blue_title_layout" />
-
-                <ImageView
-                    android:id="@+id/iv_add_image"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/bg_add_image"
-                    android:onClick="clickAddImage" />
-
-                <LinearLayout
-                    android:id="@+id/ll_image_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" />
-
-                <LinearLayout
-                    android:id="@+id/ll_cb_container_1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" />
+            <ScrollView
+                android:id="@+id/sc_record_views"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:visibility="gone">
+                    android:paddingBottom="10dp">
+
+                    <include
+                        android:id="@+id/blue_title"
+                        layout="@layout/common_form_blue_title_layout" />
 
                     <ImageView
-                        android:id="@+id/iv_constructor_change"
+                        android:id="@+id/iv_add_image"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginTop="5dp"
-                        android:scaleType="fitXY" />
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/bg_add_image"
+                        android:onClick="clickAddImage" />
 
-                    <EditText
-                        android:id="@+id/et_construct_info"
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:background="@drawable/bg_stroke_bord_line"
-                        android:gravity="top"
-                        android:hint="结构改变备注.."
-                        android:maxLength="200"
-                        android:padding="10dp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_cb_container_2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:visibility="gone">
-
-                    <TextView
+                    <LinearLayout
+                        android:id="@+id/ll_image_container"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="10dp"
-                        android:paddingTop="10dp"
-                        android:text="走访异常信息备注"
-                        android:textColor="@color/text_common"
-                        android:textStyle="bold" />
+                        android:orientation="vertical" />
 
-                    <EditText
-                        android:id="@+id/et_special_info"
+                    <LinearLayout
+                        android:id="@+id/ll_cb_container_1"
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:layout_margin="10dp"
-                        android:background="@drawable/bg_stroke_bord_line"
-                        android:gravity="top"
-                        android:hint="请输入100字内.."
-                        android:maxLength="100"
-                        android:padding="10dp" />
-                </LinearLayout>
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" />
 
-            </LinearLayout>
-        </ScrollView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:id="@+id/iv_constructor_change"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
+                            android:scaleType="fitXY" />
+
+                        <EditText
+                            android:id="@+id/et_construct_info"
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:background="@drawable/bg_stroke_bord_line"
+                            android:gravity="top"
+                            android:hint="结构改变备注.."
+                            android:maxLength="200"
+                            android:padding="10dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_cb_container_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="10dp"
+                            android:text="走访异常信息备注"
+                            android:textColor="@color/text_common"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/et_special_info"
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/bg_stroke_bord_line"
+                            android:gravity="top"
+                            android:hint="请输入100字内.."
+                            android:maxLength="100"
+                            android:padding="10dp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </ScrollView>
+
+        </FrameLayout>
+
 
         <include layout="@layout/common_1px_hor_line" />
 

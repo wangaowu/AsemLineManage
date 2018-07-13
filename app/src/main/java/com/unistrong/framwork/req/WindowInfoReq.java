@@ -20,7 +20,8 @@ public class WindowInfoReq {
     private String structChangePicurl;//房屋结构改变照片
     private String structChangeReason;//结构改变详情
     private List<AddVisitDetailsBean> addVisitDetails;
-
+    private String isEnter;//是否屋内信息
+    private String visitType;//房屋类型
 
     public String getTaskId() {
         return taskId;
@@ -108,6 +109,22 @@ public class WindowInfoReq {
 
     public void setAddVisitDetails(List<AddVisitDetailsBean> addVisitDetails) {
         this.addVisitDetails = addVisitDetails;
+    }
+
+    public String getIsEnter() {
+        return isEnter;
+    }
+
+    public void setIsEnter(String isEnter) {
+        this.isEnter = isEnter;
+    }
+
+    public String getVisitType() {
+        return visitType;
+    }
+
+    public void setVisitType(String visitType) {
+        this.visitType = visitType;
     }
 
     public static class AddVisitDetailsBean {

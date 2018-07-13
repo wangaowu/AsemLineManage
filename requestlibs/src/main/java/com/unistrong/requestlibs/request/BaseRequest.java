@@ -33,10 +33,10 @@ public class BaseRequest extends BasePolicy {
     //public static final String HOST = "http://10.66.5.220:8080/asem-line-service";//gm
     //  public static final String HOST = "http://10.66.5.232:8080/asem-line-service";//zg
     // public static final String HOST = "http://10.66.5.233:8080/asem-line-service";//zl
-    //public static final String HOST = "http://10.66.2.82:8081/asem-line-service";//测试内网
+     public static final String HOST = "http://10.66.2.82:8081/asem-line-service";//测试内网
     //public static final String HOST = "http://113.200.215.139:8902/asem-line-service";//测试外网
     //public static final String HOST = "http://10.21.96.2:8080/asem-line-service";//新疆内网
-    public static final String HOST = "http://124.117.209.133:28089/asem-line-service";//新疆外网
+    //public static final String HOST = "http://124.117.209.133:28089/asem-line-service";//新疆外网
 
 
     private Call call;

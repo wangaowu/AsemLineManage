@@ -2,6 +2,7 @@ package com.unistrong.asemlinemanage.recordinfo;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.View;
 
@@ -41,6 +42,8 @@ import java.util.concurrent.Executors;
 public class RecordHouseInfoActivity extends BaseActivity {
     public static final String TAG = "RecordHouseInfoActivity";
     private static final int CODE_PICK_IMAGE = 2;
+    //房屋类型   1房屋  2单位
+    private static final CharSequence[] VISIT_TYPE = new CharSequence[]{"房屋", "单位"};
 
     private ActivityRecordHouseInfoBinding binding;
     private ItemCheckBoxView constructorChangeView;
@@ -58,7 +61,49 @@ public class RecordHouseInfoActivity extends BaseActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_record_house_info);
         binding.layoutTitle.tvTitle.setText("走访录入");
         binding.blueTitle.title.setText("请上传窗户对外照片");
-        initViews();
+        initRecordViews();
+    }
+
+    @Override
+    protected void onFirstResume() {
+        super.onFirstResume();
+        showVisitTypeDialog();
+    }
+
+    private void showSelectEnterDialog(CharSequence visitType) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(visitType + " >>可以进入吗?");
+        builder.setSingleChoiceItems(new CharSequence[]{"可以", "不能"}, -1, (dialog_, which_) -> {
+            if (0 == which_) {
+                reqInfo.setIsEnter("Y");
+            } else {
+                reqInfo.setIsEnter("N");
+            }
+        });
+        builder.setPositiveButton("确定", (dialog, which) -> {
+            setRecordViewsVisible();
+            dialog.dismiss();
+        });
+        builder.setNegativeButton("重选", (dialog, which) -> {
+            dialog.dismiss();
+            reqInfo.setIsEnter(null);
+            reqInfo.setVisitType(null);
+            showVisitTypeDialog();
+        });
+        builder.setCancelable(false);
+        builder.create().show();
+    }
+
+
+    private void showVisitTypeDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("请选择房屋类型");
+        builder.setItems(VISIT_TYPE, (dialog, which) -> {
+            reqInfo.setVisitType(String.valueOf(which + 1));
+            showSelectEnterDialog(VISIT_TYPE[which]);
+        });
+        builder.setCancelable(false);
+        builder.create().show();
     }
 
     private void initIntent() {
@@ -66,7 +111,15 @@ public class RecordHouseInfoActivity extends BaseActivity {
                 getSerializableExtra(HouseInfoActivity.TASK_INFO));
     }
 
-    private void initViews() {
+    private void setRecordViewsVisible() {
+        String visitType = "1".equals(reqInfo.getVisitType()) ? "房屋" : "单位";
+        boolean isEnter = "Y".equals(reqInfo.getIsEnter());
+        binding.scRecordViews.setVisibility(isEnter ? View.VISIBLE : View.GONE);
+        binding.tvNone.setVisibility(isEnter ? View.GONE : View.VISIBLE);
+        binding.tvNone.setText("本次走访信息：" + visitType + "没人，无法进入.");
+    }
+
+    private void initRecordViews() {
         constructorChangeView = new ItemCheckBoxView("房屋结构是否改变?",
                 ItemCheckBoxView.VERTICAL, binding.llCbContainer1);
         isNotifyCloseView = new ItemCheckBoxView("是否告知住户靠窗窗户不能打开?",
@@ -124,7 +177,14 @@ public class RecordHouseInfoActivity extends BaseActivity {
     }
 
     public void clickSaveWindowInfo(View view) {
-        if (!isOk()) {
+        if ("N".equals(reqInfo.getIsEnter())) {
+            //非屋内走访
+            createLoadingDialog(false);
+            commitHouseInfo(false);
+            return;
+        }
+        //屋内走访
+        if (!isAvailableEnterInfo()) {
             IToast.toast("请检查走访信息!");
             return;
         }
@@ -160,15 +220,15 @@ public class RecordHouseInfoActivity extends BaseActivity {
                 }
             }
             //上传照片全部成功
-            runOnUiThread(() -> commitHouseInfo());
+            runOnUiThread(() -> commitHouseInfo(true));
         });
     }
 
-    private boolean isOk() {
-        if (taskBean == null || pickImageInfos == null || pickImageInfos.isEmpty()) {
+    private boolean isAvailableEnterInfo() {
+        if (pickImageInfos == null || pickImageInfos.isEmpty()) {
             return false;
         }
-        if (constructorChangeView.isChecked()
+        if (taskBean != null && constructorChangeView.isChecked()
                 && isNotifyCloseView.isChecked()
                 && rentPersonChangeView.isChecked()
                 && exceptionView.isChecked()) {
@@ -199,35 +259,43 @@ public class RecordHouseInfoActivity extends BaseActivity {
 
     /**
      * 提交请求
+     *
+     * @param isEnterMode 是否屋内走访
      */
-    private void commitHouseInfo() {
+    private void commitHouseInfo(boolean isEnterMode) {
         reqInfo.setHouseId(taskBean.getHouseId());//主键id
         reqInfo.setTaskId(taskBean.getTaskId());//任务id
         reqInfo.setSubtaskId(taskBean.getSubtaskId());//子任务id
-        reqInfo.setAddVisitDetails(pickImageInfos);//窗户信息
-        reqInfo.setStructChange(constructorChangeView.isCheckedPositive() ? "Y" : "N");//结构改变
-        reqInfo.setNotify(isNotifyCloseView.isCheckedPositive() ? "Y" : "N");//告知关闭
-        reqInfo.setRenterChange(rentPersonChangeView.isCheckedPositive() ? "Y" : "N");//承租人改变
-        reqInfo.setAbnomal(exceptionView.isCheckedPositive() ? "Y" : "N");//异常改变
-        String constructContent = binding.etConstructInfo.getText().toString();
-        if (constructorChangeView.isCheckedPositive() && TextUtils.isEmpty(constructContent)) {
-            //选中结构异常，但没有备注信息
-            closeLoadingDialog();
-            IToast.toast("请备注结构改变!");
-            return;
-        }
-        if (!isNotifyCloseView.isCheckedPositive()) {
-            IToast.toast("请关闭窗户!");
-            return;
-        }
-        reqInfo.setStructChangeReason(constructContent);
-        String exceptionContent = binding.etSpecialInfo.getText().toString();
-        reqInfo.setAbnomalReason(exceptionContent);
-        if (exceptionView.isCheckedPositive() && TextUtils.isEmpty(exceptionContent)) {
-            //选中了异常yes,但不填入信息
-            closeLoadingDialog();
-            IToast.toast("请备注走访异常!");
-            return;
+        reqInfo.setSubtaskId(taskBean.getSubtaskId());//子任务id
+        if (isEnterMode) {
+            reqInfo.setIsEnter("Y"); //屋内走访
+            reqInfo.setAddVisitDetails(pickImageInfos);//窗户信息
+            reqInfo.setStructChange(constructorChangeView.isCheckedPositive() ? "Y" : "N");//结构改变
+            reqInfo.setNotify(isNotifyCloseView.isCheckedPositive() ? "Y" : "N");//告知关闭
+            reqInfo.setRenterChange(rentPersonChangeView.isCheckedPositive() ? "Y" : "N");//承租人改变
+            reqInfo.setAbnomal(exceptionView.isCheckedPositive() ? "Y" : "N");//异常改变
+            String constructContent = binding.etConstructInfo.getText().toString();
+            if (constructorChangeView.isCheckedPositive() && TextUtils.isEmpty(constructContent)) {
+                //选中结构异常，但没有备注信息
+                closeLoadingDialog();
+                IToast.toast("请备注结构改变!");
+                return;
+            }
+            if (!isNotifyCloseView.isCheckedPositive()) {
+                IToast.toast("请关闭窗户!");
+                return;
+            }
+            reqInfo.setStructChangeReason(constructContent);
+            String exceptionContent = binding.etSpecialInfo.getText().toString();
+            reqInfo.setAbnomalReason(exceptionContent);
+            if (exceptionView.isCheckedPositive() && TextUtils.isEmpty(exceptionContent)) {
+                //选中了异常yes,但不填入信息
+                closeLoadingDialog();
+                IToast.toast("请备注走访异常!");
+                return;
+            }
+        } else {
+            reqInfo.setIsEnter("N");//屋外走访
         }
         String action = Constant.Action.POST_WINDOW_INFO;
         int method = IRequest.Method.POST_AS_JSON;
