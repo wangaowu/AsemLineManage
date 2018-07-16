@@ -52,9 +52,16 @@ public class PersonInfoFragment extends Fragment {
 
     private void setViewsData(List<PersonInfoResp.ResultBean> result) {
         binding.llScContainer.removeAllViews();
+        int index = 0;
         for (PersonInfoResp.ResultBean bean : result) {
+            if (index++ != 0) addLine();//给非首项添加分隔线
             addItems(bean);
         }
+    }
+
+    private void addLine() {
+        View horLine = View.inflate(getContext(), R.layout.common_1px_hor_line, null);
+        binding.llScContainer.addView(horLine);
     }
 
     private void addItems(PersonInfoResp.ResultBean resultBean) {

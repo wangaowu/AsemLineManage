@@ -22,6 +22,61 @@ public class WindowInfoReq {
     private List<AddVisitDetailsBean> addVisitDetails;
     private String isEnter;//是否屋内信息
     private String visitType;//房屋类型
+    //单位异常
+    private String securityCheck;//安防检查是否异常
+    private String securityAbnomalReason;//安防检查异常原因描述
+    private String fireControlCheck;//消防检查是否异常
+    private String fireControlAbnomalReason;//消防检查异常原因描述
+    private String peopleCheck;//人员检查是否异常
+    private String peopleAbnomalReason;//人员检查是异常原因描述
+
+    public String getSecurityCheck() {
+        return securityCheck;
+    }
+
+    public void setSecurityCheck(String securityCheck) {
+        this.securityCheck = securityCheck;
+    }
+
+    public String getSecurityAbnomalReason() {
+        return securityAbnomalReason;
+    }
+
+    public void setSecurityAbnomalReason(String securityAbnomalReason) {
+        this.securityAbnomalReason = securityAbnomalReason;
+    }
+
+    public String getFireControlCheck() {
+        return fireControlCheck;
+    }
+
+    public void setFireControlCheck(String fireControlCheck) {
+        this.fireControlCheck = fireControlCheck;
+    }
+
+    public String getFireControlAbnomalReason() {
+        return fireControlAbnomalReason;
+    }
+
+    public void setFireControlAbnomalReason(String fireControlAbnomalReason) {
+        this.fireControlAbnomalReason = fireControlAbnomalReason;
+    }
+
+    public String getPeopleCheck() {
+        return peopleCheck;
+    }
+
+    public void setPeopleCheck(String peopleCheck) {
+        this.peopleCheck = peopleCheck;
+    }
+
+    public String getPeopleAbnomalReason() {
+        return peopleAbnomalReason;
+    }
+
+    public void setPeopleAbnomalReason(String peopleAbnomalReason) {
+        this.peopleAbnomalReason = peopleAbnomalReason;
+    }
 
     public String getTaskId() {
         return taskId;

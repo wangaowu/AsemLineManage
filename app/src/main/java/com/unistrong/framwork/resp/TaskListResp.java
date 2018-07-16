@@ -82,6 +82,7 @@ public class TaskListResp {
          * taskCreateTime : 2018-06-11 18:46:45.0
          */
 
+        private String houseType;
         private String subtaskId;
         private String taskId;
         private String houseId;
@@ -225,6 +226,14 @@ public class TaskListResp {
 
         public void setTaskCreateTime(String taskCreateTime) {
             this.taskCreateTime = taskCreateTime;
+        }
+
+        public String getHouseType() {
+            return houseType;
+        }
+
+        public void setHouseType(String houseType) {
+            this.houseType = houseType;
         }
     }
 }

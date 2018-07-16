@@ -43,6 +43,8 @@ public class RecordHouseInfoActivity extends BaseActivity {
     public static final String TAG = "RecordHouseInfoActivity";
     private static final int CODE_PICK_IMAGE = 2;
     //房屋类型   1房屋  2单位
+    private static final String TYPE_HOUSE = "1";
+    private static final String TYPE_COMPANY = "2";
     private static final CharSequence[] VISIT_TYPE = new CharSequence[]{"房屋", "单位"};
 
     private ActivityRecordHouseInfoBinding binding;
@@ -50,6 +52,10 @@ public class RecordHouseInfoActivity extends BaseActivity {
     private ItemCheckBoxView isNotifyCloseView;
     private ItemCheckBoxView rentPersonChangeView;
     private ItemCheckBoxView exceptionView;
+    private ItemCheckBoxView securityView;
+    private ItemCheckBoxView fireControlView;
+    private ItemCheckBoxView personView;
+
     private List<WindowInfoReq.AddVisitDetailsBean> pickImageInfos = new ArrayList<>();
     private String constuctorChangeImagePath;
     private TaskListResp.ResultBean taskBean = new TaskListResp.ResultBean();
@@ -67,13 +73,14 @@ public class RecordHouseInfoActivity extends BaseActivity {
     @Override
     protected void onFirstResume() {
         super.onFirstResume();
-        showVisitTypeDialog();
+        showSelectEnterDialog();
     }
 
-    private void showSelectEnterDialog(CharSequence visitType) {
+    private void showSelectEnterDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(visitType + " >>可以进入吗?");
-        builder.setSingleChoiceItems(new CharSequence[]{"可以", "不能"}, -1, (dialog_, which_) -> {
+        String houseType = TYPE_HOUSE.equals(reqInfo.getVisitType()) ? "房屋" : "单位";
+        builder.setTitle("可以进入" + houseType + "吗?");
+        builder.setSingleChoiceItems(new CharSequence[]{"可以", "不能"}, 0, (dialog_, which_) -> {
             if (0 == which_) {
                 reqInfo.setIsEnter("Y");
             } else {
@@ -84,24 +91,6 @@ public class RecordHouseInfoActivity extends BaseActivity {
             setRecordViewsVisible();
             dialog.dismiss();
         });
-        builder.setNegativeButton("重选", (dialog, which) -> {
-            dialog.dismiss();
-            reqInfo.setIsEnter(null);
-            reqInfo.setVisitType(null);
-            showVisitTypeDialog();
-        });
-        builder.setCancelable(false);
-        builder.create().show();
-    }
-
-
-    private void showVisitTypeDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("请选择房屋类型");
-        builder.setItems(VISIT_TYPE, (dialog, which) -> {
-            reqInfo.setVisitType(String.valueOf(which + 1));
-            showSelectEnterDialog(VISIT_TYPE[which]);
-        });
         builder.setCancelable(false);
         builder.create().show();
     }
@@ -109,6 +98,8 @@ public class RecordHouseInfoActivity extends BaseActivity {
     private void initIntent() {
         taskBean = ((TaskListResp.ResultBean) getIntent().
                 getSerializableExtra(HouseInfoActivity.TASK_INFO));
+        reqInfo.setVisitType(taskBean.getHouseType());
+        reqInfo.setIsEnter("Y");//默认进入，弹窗索引为0，选择时改变值
     }
 
     private void setRecordViewsVisible() {
@@ -156,6 +147,44 @@ public class RecordHouseInfoActivity extends BaseActivity {
         isNotifyCloseView.setListener((buttonView, isChecked) -> {
             if (!isChecked) IToast.toast("不能关闭窗户！");
         });
+        //以下为走访单位
+        if (TYPE_HOUSE.equals(reqInfo.getVisitType())) return;
+        securityView = new ItemCheckBoxView("安防检查是否异常?",
+                ItemCheckBoxView.VERTICAL, binding.llCbContainer3);
+        fireControlView = new ItemCheckBoxView("消防检查是否异常?",
+                ItemCheckBoxView.VERTICAL, binding.llCbContainer4);
+        personView = new ItemCheckBoxView("人员检查是否异常?",
+                ItemCheckBoxView.VERTICAL, binding.llCbContainer5);
+        //安防异常
+        securityView.setListener((buttonView, isChecked) -> {
+            View parent = (View) binding.etSecurityReason.getParent();
+            if (isChecked) {
+                IToast.toast("请填写异常信息！");
+                parent.setVisibility(View.VISIBLE);
+            } else {
+                parent.setVisibility(View.GONE);
+            }
+        });
+        //消防异常
+        fireControlView.setListener((buttonView, isChecked) -> {
+            View parent = (View) binding.etFireControlReason.getParent();
+            if (isChecked) {
+                IToast.toast("请填写异常信息！");
+                parent.setVisibility(View.VISIBLE);
+            } else {
+                parent.setVisibility(View.GONE);
+            }
+        });
+        //人员异常
+        personView.setListener((buttonView, isChecked) -> {
+            View parent = (View) binding.etPersonReason.getParent();
+            if (isChecked) {
+                IToast.toast("请填写异常信息！");
+                parent.setVisibility(View.VISIBLE);
+            } else {
+                parent.setVisibility(View.GONE);
+            }
+        });
     }
 
     private void setGlobalConstructorChangeImage(String imagePath) {
@@ -180,12 +209,16 @@ public class RecordHouseInfoActivity extends BaseActivity {
         if ("N".equals(reqInfo.getIsEnter())) {
             //非屋内走访
             createLoadingDialog(false);
-            commitHouseInfo(false);
+            commitHouseInfo();
             return;
         }
         //屋内走访
-        if (!isAvailableEnterInfo()) {
-            IToast.toast("请检查走访信息!");
+        if (!hasWindowPic()) {
+            IToast.toast("请确认上传了窗户图片!");
+            return;
+        }
+        if (!isAvailableCheckedInfo()) {
+            IToast.toast("请确认没有选择空项!");
             return;
         }
         createLoadingDialog(false);
@@ -220,19 +253,34 @@ public class RecordHouseInfoActivity extends BaseActivity {
                 }
             }
             //上传照片全部成功
-            runOnUiThread(() -> commitHouseInfo(true));
+            runOnUiThread(() -> commitHouseInfo());
         });
     }
 
-    private boolean isAvailableEnterInfo() {
-        if (pickImageInfos == null || pickImageInfos.isEmpty()) {
-            return false;
-        }
-        if (taskBean != null && constructorChangeView.isChecked()
-                && isNotifyCloseView.isChecked()
-                && rentPersonChangeView.isChecked()
-                && exceptionView.isChecked()) {
+    private boolean hasWindowPic() {
+        if (pickImageInfos != null && !pickImageInfos.isEmpty()) {
             return true;
+        }
+        return false;
+    }
+
+    private boolean isAvailableCheckedInfo() {
+        if (TYPE_HOUSE.equals(reqInfo.getVisitType())) {
+            //房屋走访
+            return constructorChangeView.isChecked()
+                    && isNotifyCloseView.isChecked()
+                    && rentPersonChangeView.isChecked()
+                    && exceptionView.isChecked();
+        }
+        if (TYPE_COMPANY.equals(reqInfo.getVisitType())) {
+            //单位走访
+            return constructorChangeView.isChecked()
+                    && isNotifyCloseView.isChecked()
+                    && rentPersonChangeView.isChecked()
+                    && exceptionView.isChecked()
+                    && securityView.isChecked()
+                    && fireControlView.isChecked()
+                    && personView.isChecked();
         }
         return false;
     }
@@ -259,16 +307,14 @@ public class RecordHouseInfoActivity extends BaseActivity {
 
     /**
      * 提交请求
-     *
-     * @param isEnterMode 是否屋内走访
      */
-    private void commitHouseInfo(boolean isEnterMode) {
+    private void commitHouseInfo() {
         reqInfo.setHouseId(taskBean.getHouseId());//主键id
         reqInfo.setTaskId(taskBean.getTaskId());//任务id
         reqInfo.setSubtaskId(taskBean.getSubtaskId());//子任务id
         reqInfo.setSubtaskId(taskBean.getSubtaskId());//子任务id
-        if (isEnterMode) {
-            reqInfo.setIsEnter("Y"); //屋内走访
+        if ("Y".equals(reqInfo.getVisitType())) {
+            //屋内走访
             reqInfo.setAddVisitDetails(pickImageInfos);//窗户信息
             reqInfo.setStructChange(constructorChangeView.isCheckedPositive() ? "Y" : "N");//结构改变
             reqInfo.setNotify(isNotifyCloseView.isCheckedPositive() ? "Y" : "N");//告知关闭
@@ -294,8 +340,36 @@ public class RecordHouseInfoActivity extends BaseActivity {
                 IToast.toast("请备注走访异常!");
                 return;
             }
-        } else {
-            reqInfo.setIsEnter("N");//屋外走访
+            if (TYPE_COMPANY.equals(reqInfo.getVisitType())) {
+                //单位走访
+                reqInfo.setSecurityCheck(securityView.isCheckedPositive() ? "Y" : "N");//安防异常改变
+                reqInfo.setFireControlCheck(fireControlView.isCheckedPositive() ? "Y" : "N");//消防异常改变
+                reqInfo.setPeopleCheck(personView.isCheckedPositive() ? "Y" : "N");//人员异常改变
+                String securityReason = binding.etSecurityReason.getText().toString();
+                String fireControlReason = binding.etFireControlReason.getText().toString();
+                String personReason = binding.etPersonReason.getText().toString();
+                if (securityView.isCheckedPositive() && TextUtils.isEmpty(securityReason)) {
+                    //选中安防异常，但没有备注信息
+                    closeLoadingDialog();
+                    IToast.toast("请备注安防异常信息!");
+                    return;
+                }
+                if (fireControlView.isCheckedPositive() && TextUtils.isEmpty(fireControlReason)) {
+                    //选中消防异常，但没有备注信息
+                    closeLoadingDialog();
+                    IToast.toast("请备注消防异常信息!");
+                    return;
+                }
+                if (personView.isCheckedPositive() && TextUtils.isEmpty(personReason)) {
+                    //选中人员异常，但没有备注信息
+                    closeLoadingDialog();
+                    IToast.toast("请备注人员异常信息!");
+                    return;
+                }
+                reqInfo.setSecurityAbnomalReason(securityReason);
+                reqInfo.setFireControlAbnomalReason(fireControlReason);
+                reqInfo.setPeopleAbnomalReason(personReason);
+            }
         }
         String action = Constant.Action.POST_WINDOW_INFO;
         int method = IRequest.Method.POST_AS_JSON;

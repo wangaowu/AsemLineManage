@@ -120,6 +120,105 @@
                             android:padding="10dp" />
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:id="@+id/ll_cb_container_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="10dp"
+                            android:text="安防检查异常备注"
+                            android:textColor="@color/text_common"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/et_security_reason"
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/bg_stroke_bord_line"
+                            android:gravity="top"
+                            android:hint="请输入100字内.."
+                            android:maxLength="100"
+                            android:padding="10dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_cb_container_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="10dp"
+                            android:text="消防检查异常备注"
+                            android:textColor="@color/text_common"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/et_fire_control_reason"
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/bg_stroke_bord_line"
+                            android:gravity="top"
+                            android:hint="请输入100字内.."
+                            android:maxLength="100"
+                            android:padding="10dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_cb_container_5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="10dp"
+                            android:text="人员检查异常备注"
+                            android:textColor="@color/text_common"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/et_person_reason"
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/bg_stroke_bord_line"
+                            android:gravity="top"
+                            android:hint="请输入100字内.."
+                            android:maxLength="100"
+                            android:padding="10dp" />
+                    </LinearLayout>
+
                 </LinearLayout>
             </ScrollView>
 
