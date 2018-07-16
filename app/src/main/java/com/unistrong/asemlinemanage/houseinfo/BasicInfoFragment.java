@@ -39,11 +39,9 @@ public class BasicInfoFragment extends Fragment {
     private ItemTextView sqgbView;
     private ItemTextView sqgbTeleView;
     private ItemTextView detailAddressView;
-    private ItemTextView longitudeView;
-    private ItemTextView latitudeView;
-    private ItemTextView createTimeView;
     private ItemTextView houseCateView;
     private ItemTextView policeView;
+    private ItemTextView policeTeleView;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -66,11 +64,9 @@ public class BasicInfoFragment extends Fragment {
         sqgbView = new ItemTextView("社区干部", "", binding.llPart2);
         sqgbTeleView = new ItemTextView("社区干部联系电话", "", binding.llPart2);
         detailAddressView = new ItemTextView("详细地址", "", binding.llPart2);
-        longitudeView = new ItemTextView("经度", "", binding.llPart2);
-        latitudeView = new ItemTextView("纬度", "", binding.llPart2);
-        createTimeView = new ItemTextView("创建时间", "", binding.llPart2);
         houseCateView = new ItemTextView("房屋类别", "", binding.llPart2);
         policeView = new ItemTextView("警务室民警", "", binding.llPart2);
+        policeTeleView = new ItemTextView("民警电话", "", binding.llPart2);
     }
 
     @Override
@@ -94,13 +90,9 @@ public class BasicInfoFragment extends Fragment {
         setViewRightText(sqgbView, resultBean.getCommunityManager());
         setViewRightText(sqgbTeleView, resultBean.getCommunityManagerTel());
         setViewRightText(detailAddressView, resultBean.getHouseAddress());
-        setViewRightText(longitudeView, String.valueOf(resultBean.getLongtitude()));
-        setViewRightText(latitudeView, String.valueOf(resultBean.getLatitude()));
-        setViewRightText(createTimeView, "-");
         setViewRightText(houseCateView, resultBean.getHouseType());
         setViewRightText(policeView, resultBean.getPoliceManager());
-
-        binding.tvPoliceTele.setText("民警电话:" + resultBean.getPoliceManagerTel());
+        setViewRightText(policeTeleView, resultBean.getPoliceManagerTel());
     }
 
     private void setViewRightText(ItemTextView parent, String text) {

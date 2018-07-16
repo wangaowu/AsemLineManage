@@ -117,8 +117,6 @@ public class HouseInfoResp {
         private String communityManager;
         private String communityManagerTel;
         private String houseAddress;
-        private double latitude;
-        private double longtitude;
         private String houseQrUrl;
         private String houseType;
         private String policeManager;
@@ -300,22 +298,6 @@ public class HouseInfoResp {
 
         public void setHouseAddress(String houseAddress) {
             this.houseAddress = houseAddress;
-        }
-
-        public double getLatitude() {
-            return latitude;
-        }
-
-        public void setLatitude(double latitude) {
-            this.latitude = latitude;
-        }
-
-        public double getLongtitude() {
-            return longtitude;
-        }
-
-        public void setLongtitude(double longtitude) {
-            this.longtitude = longtitude;
         }
 
         public String getHouseQrUrl() {

@@ -10,10 +10,12 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.unistrong.asemlinemanage.R;
 import com.unistrong.asemlinemanage.databinding.FragmentPersonInfoBinding;
 import com.unistrong.baselibs.ui.spanner.ItemTextView;
+import com.unistrong.baselibs.utils.DensityUtils;
 import com.unistrong.baselibs.utils.IToast;
 import com.unistrong.framwork.resp.PersonInfoResp;
 import com.unistrong.requestlibs.response.ResponseBody;
@@ -60,8 +62,9 @@ public class PersonInfoFragment extends Fragment {
     }
 
     private void addLine() {
-        View horLine = View.inflate(getContext(), R.layout.common_1px_hor_line, null);
-        binding.llScContainer.addView(horLine);
+        View horLine = View.inflate(getContext(), R.layout.common_item_10dp_span_layout_, null);
+        int spanHeight = DensityUtils.dp2px(getContext(), 10);
+        binding.llScContainer.addView(horLine, new LinearLayout.LayoutParams(-1, spanHeight));
     }
 
     private void addItems(PersonInfoResp.ResultBean resultBean) {

@@ -43,9 +43,8 @@ public class RecordHouseInfoActivity extends BaseActivity {
     public static final String TAG = "RecordHouseInfoActivity";
     private static final int CODE_PICK_IMAGE = 2;
     //房屋类型   1房屋  2单位
-    private static final String TYPE_HOUSE = "1";
-    private static final String TYPE_COMPANY = "2";
-    private static final CharSequence[] VISIT_TYPE = new CharSequence[]{"房屋", "单位"};
+    private static final String TYPE_HOUSE = "rent";
+    private static final String TYPE_COMPANY = "office";
 
     private ActivityRecordHouseInfoBinding binding;
     private ItemCheckBoxView constructorChangeView;
@@ -78,7 +77,7 @@ public class RecordHouseInfoActivity extends BaseActivity {
 
     private void showSelectEnterDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        String houseType = TYPE_HOUSE.equals(reqInfo.getVisitType()) ? "房屋" : "单位";
+        String houseType = TYPE_HOUSE.equals(reqInfo.getHouseType()) ? "房屋" : "单位";
         builder.setTitle("可以进入" + houseType + "吗?");
         builder.setSingleChoiceItems(new CharSequence[]{"可以", "不能"}, 0, (dialog_, which_) -> {
             if (0 == which_) {
@@ -98,12 +97,12 @@ public class RecordHouseInfoActivity extends BaseActivity {
     private void initIntent() {
         taskBean = ((TaskListResp.ResultBean) getIntent().
                 getSerializableExtra(HouseInfoActivity.TASK_INFO));
-        reqInfo.setVisitType(taskBean.getHouseType());
+        reqInfo.setHouseType(taskBean.getHouseType());
         reqInfo.setIsEnter("Y");//默认进入，弹窗索引为0，选择时改变值
     }
 
     private void setRecordViewsVisible() {
-        String visitType = "1".equals(reqInfo.getVisitType()) ? "房屋" : "单位";
+        String visitType = TYPE_HOUSE.equals(reqInfo.getHouseType()) ? "房屋" : "单位";
         boolean isEnter = "Y".equals(reqInfo.getIsEnter());
         binding.scRecordViews.setVisibility(isEnter ? View.VISIBLE : View.GONE);
         binding.tvNone.setVisibility(isEnter ? View.GONE : View.VISIBLE);
@@ -148,7 +147,7 @@ public class RecordHouseInfoActivity extends BaseActivity {
             if (!isChecked) IToast.toast("不能关闭窗户！");
         });
         //以下为走访单位
-        if (TYPE_HOUSE.equals(reqInfo.getVisitType())) return;
+        if (TYPE_HOUSE.equals(reqInfo.getHouseType())) return;
         securityView = new ItemCheckBoxView("安防检查是否异常?",
                 ItemCheckBoxView.VERTICAL, binding.llCbContainer3);
         fireControlView = new ItemCheckBoxView("消防检查是否异常?",
@@ -265,14 +264,14 @@ public class RecordHouseInfoActivity extends BaseActivity {
     }
 
     private boolean isAvailableCheckedInfo() {
-        if (TYPE_HOUSE.equals(reqInfo.getVisitType())) {
+        if (TYPE_HOUSE.equals(reqInfo.getHouseType())) {
             //房屋走访
             return constructorChangeView.isChecked()
                     && isNotifyCloseView.isChecked()
                     && rentPersonChangeView.isChecked()
                     && exceptionView.isChecked();
         }
-        if (TYPE_COMPANY.equals(reqInfo.getVisitType())) {
+        if (TYPE_COMPANY.equals(reqInfo.getHouseType())) {
             //单位走访
             return constructorChangeView.isChecked()
                     && isNotifyCloseView.isChecked()
@@ -313,7 +312,7 @@ public class RecordHouseInfoActivity extends BaseActivity {
         reqInfo.setTaskId(taskBean.getTaskId());//任务id
         reqInfo.setSubtaskId(taskBean.getSubtaskId());//子任务id
         reqInfo.setSubtaskId(taskBean.getSubtaskId());//子任务id
-        if ("Y".equals(reqInfo.getVisitType())) {
+        if ("Y".equals(reqInfo.getIsEnter())) {
             //屋内走访
             reqInfo.setAddVisitDetails(pickImageInfos);//窗户信息
             reqInfo.setStructChange(constructorChangeView.isCheckedPositive() ? "Y" : "N");//结构改变
@@ -340,7 +339,7 @@ public class RecordHouseInfoActivity extends BaseActivity {
                 IToast.toast("请备注走访异常!");
                 return;
             }
-            if (TYPE_COMPANY.equals(reqInfo.getVisitType())) {
+            if (TYPE_COMPANY.equals(reqInfo.getHouseType())) {
                 //单位走访
                 reqInfo.setSecurityCheck(securityView.isCheckedPositive() ? "Y" : "N");//安防异常改变
                 reqInfo.setFireControlCheck(fireControlView.isCheckedPositive() ? "Y" : "N");//消防异常改变

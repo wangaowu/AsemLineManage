@@ -21,7 +21,7 @@ public class WindowInfoReq {
     private String structChangeReason;//结构改变详情
     private List<AddVisitDetailsBean> addVisitDetails;
     private String isEnter;//是否屋内信息
-    private String visitType;//房屋类型
+    private String houseType;//房屋类型
     //单位异常
     private String securityCheck;//安防检查是否异常
     private String securityAbnomalReason;//安防检查异常原因描述
@@ -174,12 +174,12 @@ public class WindowInfoReq {
         this.isEnter = isEnter;
     }
 
-    public String getVisitType() {
-        return visitType;
+    public String getHouseType() {
+        return houseType;
     }
 
-    public void setVisitType(String visitType) {
-        this.visitType = visitType;
+    public void setHouseType(String houseType) {
+        this.houseType = houseType;
     }
 
     public static class AddVisitDetailsBean {
