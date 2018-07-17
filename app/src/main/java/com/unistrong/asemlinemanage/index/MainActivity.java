@@ -87,13 +87,13 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
             if ("officialProceding".equals(bean.getStatus())) {
                 //单位未完成
                 binding.tvNotVisitCompanyCount.setText("单位: " + bean.getNum());
-            } else if ("proceding".equals(bean.getStatus())) {
+            } else if ("rentProceding".equals(bean.getStatus())) {
                 //房屋未完成
                 binding.tvNotVisitHouseCount.setText("房屋: " + bean.getNum());
             } else if ("officialFinished".equals(bean.getStatus())) {
                 //单位已完成
                 binding.tvVisitedCompanyCount.setText("单位: " + bean.getNum());
-            } else if ("finished".equals(bean.getStatus())) {
+            } else if ("rentFinished".equals(bean.getStatus())) {
                 //房屋已完成
                 binding.tvVisitedHouseCount.setText("房屋: " + bean.getNum());
             }
