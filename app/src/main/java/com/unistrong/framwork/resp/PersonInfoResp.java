@@ -87,6 +87,24 @@ public class PersonInfoResp {
         private String personType;
         private String sex;
         private String telephone;
+        private String nationName;
+        private String birthOfficeName;
+
+        public String getNationName() {
+            return nationName;
+        }
+
+        public void setNationName(String nationName) {
+            this.nationName = nationName;
+        }
+
+        public String getBirthOfficeName() {
+            return birthOfficeName;
+        }
+
+        public void setBirthOfficeName(String birthOfficeName) {
+            this.birthOfficeName = birthOfficeName;
+        }
 
         public String getBirth() {
             return birth;

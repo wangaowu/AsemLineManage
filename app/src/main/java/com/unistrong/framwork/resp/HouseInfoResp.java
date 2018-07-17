@@ -93,6 +93,9 @@ public class HouseInfoResp {
          * policeManagerTel :
          * houseRoomStructure : null
          * houseRoomCount : null
+         * "houseProperty": "81",
+         * "houseCategroy": "20",
+         * "houseUse": null
          */
 
         private String houseId;
@@ -123,6 +126,51 @@ public class HouseInfoResp {
         private String policeManagerTel;
         private String houseRoomStructure;
         private String houseRoomCount;
+        private String houseProperty;
+        private String houseCategroy;
+        private String houseUse;
+        private String houseHolderName;
+        private String houseHolderIdNum;
+
+        public String getHouseProperty() {
+            return houseProperty;
+        }
+
+        public void setHouseProperty(String houseProperty) {
+            this.houseProperty = houseProperty;
+        }
+
+        public String getHouseCategroy() {
+            return houseCategroy;
+        }
+
+        public void setHouseCategroy(String houseCategroy) {
+            this.houseCategroy = houseCategroy;
+        }
+
+        public String getHouseUse() {
+            return houseUse;
+        }
+
+        public void setHouseUse(String houseUse) {
+            this.houseUse = houseUse;
+        }
+
+        public String getHouseHolderName() {
+            return houseHolderName;
+        }
+
+        public void setHouseHolderName(String houseHolderName) {
+            this.houseHolderName = houseHolderName;
+        }
+
+        public String getHouseHolderIdNum() {
+            return houseHolderIdNum;
+        }
+
+        public void setHouseHolderIdNum(String houseHolderIdNum) {
+            this.houseHolderIdNum = houseHolderIdNum;
+        }
 
         public String getHouseId() {
             return houseId;

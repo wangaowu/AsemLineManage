@@ -29,13 +29,6 @@ public class PersonInfoFragment extends Fragment {
 
     public static final String TAG = "PersonInfoFragment";
     private FragmentPersonInfoBinding binding;
-    private ItemTextView hostNameView;
-    private ItemTextView hjDetailView;
-    private ItemTextView hkssxqView;
-    private ItemTextView birthdayView;
-    private ItemTextView ethnicView;
-    private ItemTextView maleView;
-    private ItemTextView hostTeleView;
     private HouseInfoActivity activity;
     private HouseInfoPresenter presenter;
 
@@ -57,7 +50,7 @@ public class PersonInfoFragment extends Fragment {
         int index = 0;
         for (PersonInfoResp.ResultBean bean : result) {
             if (index++ != 0) addLine();//给非首项添加分隔线
-            addItems(bean);
+            binding.llScContainer.addView(getItemView(bean));
         }
     }
 
@@ -67,23 +60,24 @@ public class PersonInfoFragment extends Fragment {
         binding.llScContainer.addView(horLine, new LinearLayout.LayoutParams(-1, spanHeight));
     }
 
-    private void addItems(PersonInfoResp.ResultBean resultBean) {
-        hostNameView = new ItemTextView("人员姓名", "", binding.llScContainer);
-        hostTeleView = new ItemTextView("联系电话", "", binding.llScContainer);
-        maleView = new ItemTextView("性别", "", binding.llScContainer);
-        ethnicView = new ItemTextView("民族", "", binding.llScContainer);
-        birthdayView = new ItemTextView("出生日期", "", binding.llScContainer);
-        hkssxqView = new ItemTextView("户口地所属辖区", "", binding.llScContainer);
-        hjDetailView = new ItemTextView("户籍详细地址", "", binding.llScContainer);
-//        houseCateView = new ItemTextView("房屋类别", "", binding.llScContainer);
-//        personCateView = new ItemTextView("人员类型", "", binding.llScContainer);
+    private LinearLayout getItemView(PersonInfoResp.ResultBean resultBean) {
+        LinearLayout llContainer = new LinearLayout(getContext());
+        llContainer.setOrientation(LinearLayout.VERTICAL);
+        ItemTextView hostNameView = new ItemTextView("人员姓名", "", llContainer);
+        ItemTextView hostTeleView = new ItemTextView("联系电话", "", llContainer);
+        ItemTextView maleView = new ItemTextView("性别", "", llContainer);
+        ItemTextView ethnicView = new ItemTextView("民族", "", llContainer);
+        ItemTextView birthdayView = new ItemTextView("出生日期", "", llContainer);
+        ItemTextView hkssxqView = new ItemTextView("户口地所属辖区", "", llContainer);
+        ItemTextView hjDetailView = new ItemTextView("户籍详细地址", "", llContainer);
         setViewRightText(hostNameView, resultBean.getName());
         setViewRightText(hostTeleView, resultBean.getTelephone());
         setViewRightText(maleView, resultBean.getSex());
-        setViewRightText(ethnicView, resultBean.getNation());
+        setViewRightText(ethnicView, resultBean.getNationName());
         setViewRightText(birthdayView, resultBean.getBirth());
-        setViewRightText(hkssxqView, resultBean.getLivePoliceStation());
-        setViewRightText(hjDetailView, resultBean.getLiveAddress());
+        setViewRightText(hkssxqView, resultBean.getBirthOfficeName());
+        setViewRightText(hjDetailView, resultBean.getBirthAddress());
+        return llContainer;
     }
 
     private void setViewRightText(ItemTextView parent, String text) {

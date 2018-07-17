@@ -98,7 +98,7 @@ public class HouseImageFragment extends Fragment {
         activity.createLoadingDialog();
         presenter = new HouseInfoPresenter();
         presenter.requestHouseImageInfo(activity.taskInfo.getHouseId(),
-                activity.taskInfo.getSubtaskId(),
+                activity.taskInfo.getSubtaskId(), activity.taskInfo.getHouseType(),
                 new ResponseBody<WindowInfoResp>(WindowInfoResp.class) {
                     @Override
                     public void onFailure(String message) {

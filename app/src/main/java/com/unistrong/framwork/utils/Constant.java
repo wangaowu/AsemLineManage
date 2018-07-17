@@ -14,6 +14,7 @@ public class Constant {
         public static final String LOGIN = "/user/login";
         public static final String QUERY_DICT = "/dic/getDictionaryList";
         public static final String QUERY_HOUSE_INFO = "/houseInfo/query";
+        public static final String QUERY_COMPANY_INFO = "/office/query";
         public static final String QUERY_PERSONS_INFO = "/person/query";
         public static final String QUERY_WINDOW_INFO = "/visitInfo/query";
         public static final String POST_WINDOW_INFO = "/visitInfo/registerData";
@@ -35,6 +36,11 @@ public class Constant {
         public static final String PROVINCE = "province";
         public static final String CITY = "city";
         public static final String DISTRICT = "district";
+    }
+
+    public static class Value {
+        public static final String TYPE_HOUSE = "rent";
+        public static final String TYPE_COMPANY = "official";
     }
 
 }

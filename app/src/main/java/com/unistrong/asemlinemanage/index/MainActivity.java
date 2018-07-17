@@ -11,9 +11,7 @@ import com.unistrong.MipAddressUtils;
 import com.unistrong.MipcaActivityCapture;
 import com.unistrong.asemlinemanage.R;
 import com.unistrong.asemlinemanage.databinding.ActivityMainBinding;
-import com.unistrong.asemlinemanage.mytask.AlreadyDoingFragment;
 import com.unistrong.asemlinemanage.mytask.MyTaskActivity;
-import com.unistrong.asemlinemanage.mytask.UndoingFragment;
 import com.unistrong.baidulocation.LocationService;
 import com.unistrong.baidulocation.OnReceiveInfo;
 import com.unistrong.baselibs.style.BaseActivity;
@@ -86,12 +84,18 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
      */
     private void setCount(List<TaskCountResp.ResultBean> list) {
         for (TaskCountResp.ResultBean bean : list) {
-            if (UndoingFragment.STATUS.equals(bean.getStatus())) {
-                //待完成
-                binding.tvNotVisitCount.setText(String.valueOf(bean.getNum()));
-            } else if (AlreadyDoingFragment.STATUS.equals(bean.getStatus())) {
-                //已完成
-                binding.tvVisitedCount.setText(String.valueOf(bean.getNum()));
+            if ("officialProceding".equals(bean.getStatus())) {
+                //单位未完成
+                binding.tvNotVisitCompanyCount.setText("单位: " + bean.getNum());
+            } else if ("proceding".equals(bean.getStatus())) {
+                //房屋未完成
+                binding.tvNotVisitHouseCount.setText("房屋: " + bean.getNum());
+            } else if ("officialFinished".equals(bean.getStatus())) {
+                //单位已完成
+                binding.tvVisitedCompanyCount.setText("单位: " + bean.getNum());
+            } else if ("finished".equals(bean.getStatus())) {
+                //房屋已完成
+                binding.tvVisitedHouseCount.setText("房屋: " + bean.getNum());
             }
         }
     }
@@ -150,23 +154,33 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
      * @param houseId 扫描时用
      * @param showTag 展示标记
      */
-    private void startMyTaskActivity(String houseId, int showTag) {
+    private void startMyTaskActivity(String houseId, String houseType, int showTag) {
         Intent intent = new Intent(this, MyTaskActivity.class);
         intent.putExtra(MyTaskActivity.HOUSE_ID, houseId);
         intent.putExtra(MyTaskActivity.FRAGMENT_KEY, showTag);
+        intent.putExtra(MyTaskActivity.HOUSE_TYPE, houseType);
         startActivity(intent);
     }
 
-    public void clickMyTask(View view) {
-        startMyTaskActivity(null, MyTaskActivity.TAG_SHOW_UNDOING);
+    //点击已完成房屋
+    public void clickVisitedHouse(View view) {
+        startMyTaskActivity(null, Constant.Value.TYPE_HOUSE, MyTaskActivity.TAG_SHOW_ALREADY_DOING);
     }
 
-    public void clickUndoing(View view) {
-        startMyTaskActivity(null, MyTaskActivity.TAG_SHOW_UNDOING);
+    //点击已完成单位
+    public void clickVisitedCompany(View view) {
+        startMyTaskActivity(null, Constant.Value.TYPE_COMPANY, MyTaskActivity.TAG_SHOW_ALREADY_DOING);
     }
 
-    public void clickAlreadyDoing(View view) {
-        startMyTaskActivity(null, MyTaskActivity.TAG_SHOW_ALREADY_DOING);
+    //点击未完成房屋
+    public void clickNotVisitHouse(View view) {
+        startMyTaskActivity(null, Constant.Value.TYPE_HOUSE, MyTaskActivity.TAG_SHOW_UNDOING);
+    }
+
+    //点击未完成单位
+    public void clickNotVisitCompany(View view) {
+        startMyTaskActivity(null, Constant.Value.TYPE_COMPANY, MyTaskActivity.TAG_SHOW_UNDOING);
+
     }
 
     @Override
@@ -176,7 +190,7 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         String houseId = MipAddressUtils.getHouseIdString(resultCode, data);
         Log.e(TAG, "HOUSE_ID: " + houseId);
         if (TextUtils.isEmpty(houseId)) return;
-        startMyTaskActivity(houseId, MyTaskActivity.TAG_SHOW_UNDOING);
+        startMyTaskActivity(houseId, Constant.Value.TYPE_HOUSE, MyTaskActivity.TAG_SHOW_UNDOING);
     }
 
     @Override
@@ -200,4 +214,5 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     public void onRefresh() {
         requestMyTask();
     }
+
 }

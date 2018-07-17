@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.unistrong.asemlinemanage.R;
 import com.unistrong.framwork.resp.TaskListResp;
+import com.unistrong.framwork.utils.Constant;
 import com.unistrong.framwork.utils.FilterDateUtil;
 
 import java.util.ArrayList;
@@ -54,10 +55,10 @@ public class TaskListAdapter extends BaseAdapter {
             holder = new ViewHolder();
             convertView = View.inflate(context, R.layout.item_task_list_layout, null);
             holder.tvTaskName = convertView.findViewById(R.id.tv_task_name);
-            holder.tvStatus = convertView.findViewById(R.id.tv_status);
+            holder.tvHouseType = convertView.findViewById(R.id.tv_house_type);
             holder.tvChangeStatus = convertView.findViewById(R.id.tv_change_status);
             holder.tvTaskAddress = convertView.findViewById(R.id.tv_task_address);
-            holder.tvCreateTime = convertView.findViewById(R.id.tv_create_time);
+            holder.tvTaskDesc = convertView.findViewById(R.id.tv_task_desc);
             holder.tvBeginningTime = convertView.findViewById(R.id.tv_beginning_time);
             holder.tvEndTime = convertView.findViewById(R.id.tv_end_time);
             convertView.setTag(holder);
@@ -74,21 +75,20 @@ public class TaskListAdapter extends BaseAdapter {
     }
 
     private void setItemData(int position, ViewHolder holder) {
-        if (UndoingFragment.STATUS.equals(status)) {
-            //未完成
-            holder.tvStatus.setVisibility(View.GONE);
-            holder.tvChangeStatus.setVisibility(View.VISIBLE);
-        } else {
-            //已完成
-            holder.tvStatus.setVisibility(View.VISIBLE);
-            holder.tvChangeStatus.setVisibility(View.INVISIBLE);
-        }
         TaskListResp.ResultBean bean = datas.get(position);
+        boolean isHouse = Constant.Value.TYPE_HOUSE.equals(bean.getHouseType());
+        boolean isUndoing = UndoingFragment.STATUS.equals(status);
+        holder.tvHouseType.setText(isHouse ? "房屋" : "单位");
+        holder.tvChangeStatus.setVisibility(isUndoing ? View.VISIBLE : View.INVISIBLE);
         holder.tvTaskName.setText(getString(bean.getTaskName()));
-        holder.tvTaskAddress.setText("房屋地址:" + getString(bean.getHouseAddress()));
+        if (Constant.Value.TYPE_HOUSE.equals(bean.getHouseType())) {
+            holder.tvTaskAddress.setText("房屋地址:" + getString(bean.getHouseAddress()));
+        } else {
+            holder.tvTaskAddress.setText("单位地址:" + getString(bean.getHouseAddress()));
+        }
         holder.tvBeginningTime.setText("开始时间:" + FilterDateUtil.filter(bean.getTaskStartTime()));
-        holder.tvEndTime.setText("结束时间:" + FilterDateUtil.filter(bean.getTaskEndTime()));
-        holder.tvCreateTime.setText("创建时间:" + FilterDateUtil.filter(bean.getTaskCreateTime()));
+        holder.tvEndTime.setText("结束时间:" + FilterDateUtil.filter(bean.getSubtaskFinishTime()));
+        holder.tvTaskDesc.setText("任务描述:" + getString(bean.getTaskDesc()));
     }
 
     private String getString(String src) {
@@ -96,10 +96,10 @@ public class TaskListAdapter extends BaseAdapter {
     }
 
     class ViewHolder {
-        public TextView tvStatus;
+        public TextView tvHouseType;
         public TextView tvChangeStatus;
         public TextView tvTaskAddress;
-        public TextView tvCreateTime;
+        public TextView tvTaskDesc;
         public TextView tvBeginningTime;
         public TextView tvEndTime;
         public TextView tvTaskName;

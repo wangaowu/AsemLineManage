@@ -18,6 +18,7 @@ import com.unistrong.framwork.resp.TaskListResp;
 public class MyTaskActivity extends BaseActivity {
     public static final String TAG = "MyTaskActivity";
     public static final String FRAGMENT_KEY = "showTag";
+    public static final String HOUSE_TYPE = "houseType";
     public static final String HOUSE_ID = "houseId";
     public static final int TAG_SHOW_UNDOING = 1;
     public static final int TAG_SHOW_ALREADY_DOING = 2;
@@ -27,6 +28,7 @@ public class MyTaskActivity extends BaseActivity {
     private MyTaskViewModel viewModel;
     private MyTaskPresenter presenter;
     public String houseId;
+    public String houseType;
 
     @Override
     protected int getStatusBarColor() {
@@ -42,6 +44,7 @@ public class MyTaskActivity extends BaseActivity {
         viewModel.setActivityStyle("我的任务列表", STATUS_BLUE);
 
         houseId = getIntent().getStringExtra(HOUSE_ID);
+        houseType = getIntent().getStringExtra(HOUSE_TYPE);
         showFragmentAt(getIntent().getIntExtra(FRAGMENT_KEY, 0));
     }
 

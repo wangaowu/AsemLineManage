@@ -175,7 +175,7 @@ public class WindowInfoReq {
     }
 
     public String getHouseType() {
-        return houseType;
+        return houseType ;
     }
 
     public void setHouseType(String houseType) {
