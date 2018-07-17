@@ -60,7 +60,7 @@ public class UndoingFragment extends Fragment implements LoadMoreListView.OnLoad
     public void onAttach(Context context) {
         super.onAttach(context);
         activity = (MyTaskActivity) context;
-        presenter = new MyTaskPresenter();
+        presenter = new MyTaskPresenter(getContext());
         requestData(currentIndex = START_INDEX);
     }
 

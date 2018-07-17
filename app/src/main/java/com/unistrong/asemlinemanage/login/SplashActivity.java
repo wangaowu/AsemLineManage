@@ -53,6 +53,8 @@ public class SplashActivity extends BaseActivity {
                         SPUtils.putString(SplashActivity.this,
                                 Constant.SP_KEY.USER_ID, String.valueOf(resp.getResult().getUserId()));
                         SPUtils.putString(SplashActivity.this,
+                                Constant.SP_KEY.OFFICE_CODE, String.valueOf(resp.getResult().getUserOfficeCode()));
+                        SPUtils.putString(SplashActivity.this,
                                 Constant.SP_KEY.TOKEN, String.valueOf(resp.getResult().getToken()));
                         loginPresenter.startMainActivity(SplashActivity.this);
                         finish();

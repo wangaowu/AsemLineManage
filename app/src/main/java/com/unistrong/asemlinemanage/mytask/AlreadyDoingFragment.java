@@ -60,7 +60,7 @@ public class AlreadyDoingFragment extends Fragment implements LoadMoreListView.O
     public void onAttach(Context context) {
         super.onAttach(context);
         activity = (MyTaskActivity) context;
-        presenter = new MyTaskPresenter();
+        presenter = new MyTaskPresenter(getContext());
         requestData(currentIndex = START_INDEX);
     }
 

@@ -107,6 +107,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
                             IToast.toast(resp.getMsg());
                             return;
                         }
+                        saveSpOfficeCode(resp.getResult().getUserOfficeCode());
                         saveSpUserAccount();
                         saveSpPassword();
                         saveSpToken(resp.getResult().getToken());
@@ -115,6 +116,10 @@ public class LoginActivity extends BaseActivity implements LoginView {
                         finish();
                     }
                 });
+    }
+
+    private void saveSpOfficeCode(String officeCode) {
+        SPUtils.putString(this, Constant.SP_KEY.OFFICE_CODE, String.valueOf(officeCode));
     }
 
     private void saveSpUserId(int userId) {

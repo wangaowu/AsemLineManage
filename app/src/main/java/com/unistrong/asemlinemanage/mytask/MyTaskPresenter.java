@@ -1,5 +1,8 @@
 package com.unistrong.asemlinemanage.mytask;
 
+import android.content.Context;
+
+import com.unistrong.baselibs.utils.SPUtils;
 import com.unistrong.framwork.utils.Constant;
 import com.unistrong.framwork.utils.HttpRequestImpl;
 import com.unistrong.requestlibs.response.ResponseBody;
@@ -7,6 +10,12 @@ import com.unistrong.requestlibs.response.ResponseBody;
 import java.util.HashMap;
 
 public class MyTaskPresenter {
+
+    private Context context;
+
+    public MyTaskPresenter(Context context) {
+        this.context = context;
+    }
 
     /**
      * 请求任务列表
@@ -24,6 +33,7 @@ public class MyTaskPresenter {
         params.put("pageSize", String.valueOf(15));
         params.put("houseId", houseId);
         params.put("houseType", houseType);
+        params.put("officeCode", SPUtils.getString(context, Constant.SP_KEY.OFFICE_CODE));
         HttpRequestImpl.getInstance().requestPost(Constant.Action.QUERY_TASK_LIST, params, listener);
     }
 }

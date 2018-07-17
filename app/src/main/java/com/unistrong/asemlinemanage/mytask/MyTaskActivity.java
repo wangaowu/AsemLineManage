@@ -26,7 +26,6 @@ public class MyTaskActivity extends BaseActivity {
     private FragmentManager fragmentManager;
     private ActivityMyTaskBinding binding;
     private MyTaskViewModel viewModel;
-    private MyTaskPresenter presenter;
     public String houseId;
     public String houseType;
 
@@ -40,7 +39,6 @@ public class MyTaskActivity extends BaseActivity {
         fragmentManager = getSupportFragmentManager();
         binding = DataBindingUtil.setContentView(this, R.layout.activity_my_task);
         viewModel = new MyTaskViewModel(binding);
-        presenter = new MyTaskPresenter();
         viewModel.setActivityStyle("我的任务列表", STATUS_BLUE);
 
         houseId = getIntent().getStringExtra(HOUSE_ID);

@@ -29,6 +29,7 @@ public class Constant {
         public static final String USER_PWD = "user_password";
         public static final String TOKEN = "token";
         public static final String USER_ID = "user_id";
+        public static final String OFFICE_CODE = "office_code";
 
         //address info
         public static final String LAT = "latitude";
