@@ -66,6 +66,7 @@ public class UndoingFragment extends Fragment implements LoadMoreListView.OnLoad
 
     public void initRequest() {
         datas.clear();
+        notifyAdapterRefresh();
         requestData(currentIndex = START_INDEX);
     }
 
