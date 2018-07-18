@@ -16,10 +16,10 @@ import com.unistrong.baselibs.style.BaseActivity;
 import com.unistrong.baselibs.utils.BitmapUtils;
 import com.unistrong.baselibs.utils.IToast;
 import com.unistrong.framwork.common.ItemPickImageLayout;
-import com.unistrong.framwork.common.WindowInfoResp;
 import com.unistrong.framwork.common.WindowInfoState;
 import com.unistrong.framwork.req.WindowInfoReq;
 import com.unistrong.framwork.resp.RemoteImageResp;
+import com.unistrong.framwork.resp.WindowImageResp;
 import com.unistrong.framwork.utils.Constant;
 import com.unistrong.framwork.utils.DynamicDictUtils;
 import com.unistrong.framwork.utils.HttpRequestImpl;
@@ -45,7 +45,7 @@ public class UpdateHouseInfoActivity extends BaseActivity {
     private ActivityUpdateImageBinding binding;
     private String[] houseCateArray;
     private String[] windowDirectArray;
-    private WindowInfoResp.ResultBean.VisitDetailListBean oldBean;
+    private WindowImageResp.ResultBean oldBean;
 
     @Override
     protected void initMvp() {
@@ -71,7 +71,7 @@ public class UpdateHouseInfoActivity extends BaseActivity {
     }
 
     private void initIntent() {
-        oldBean = (WindowInfoResp.ResultBean.VisitDetailListBean) getIntent()
+        oldBean = (WindowImageResp.ResultBean) getIntent()
                 .getSerializableExtra(INTENT_KEY);
     }
 

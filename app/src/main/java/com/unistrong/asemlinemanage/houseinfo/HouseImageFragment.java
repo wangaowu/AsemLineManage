@@ -25,15 +25,18 @@ import com.unistrong.baselibs.utils.DensityUtils;
 import com.unistrong.baselibs.utils.IToast;
 import com.unistrong.framwork.common.ItemImageView;
 import com.unistrong.framwork.common.WindowInfoResp;
+import com.unistrong.framwork.resp.WindowImageResp;
 import com.unistrong.framwork.utils.VerifyGlide;
 import com.unistrong.requestlibs.response.ResponseBody;
+
+import java.util.List;
 
 /**
  * 房屋照片
  */
 public class HouseImageFragment extends Fragment {
-
     public static final String TAG = "HouseImageFragment";
+
     private FragmentHouseImageBinding binding;
     private HouseInfoActivity activity;
     private HouseInfoPresenter presenter;
@@ -56,17 +59,8 @@ public class HouseImageFragment extends Fragment {
         binding.llImageContainer.addView(textView, layoutParams);
     }
 
-    private void setViewsData(WindowInfoResp.ResultBean resultBean) {
-        //设置view条目
-        binding.llImageContainer.removeAllViews();
-        for (WindowInfoResp.ResultBean.VisitDetailListBean bean : resultBean.getVisitDetailList()) {
-            String imagePath = bean.getWindowPicurl();
-            String windowInfo = bean.getWindowType() + " 窗户朝向" + bean.getWindowDirection();
-            String windowDesc = TextUtils.isEmpty(bean.getWindowDesc()) ? "-" : bean.getWindowDesc();
-            new ItemImageView(imagePath, windowInfo, windowDesc, binding.llImageContainer)
-                    .setOnItemClickListener((v) ->
-                            presenter.startUpdateHouseInfoActivity(getContext(), bean));
-        }
+    //设置走访信息
+    private void setInfoViewsData(WindowInfoResp.ResultBean resultBean) {
         //设置异常备注
         String specialInfo = resultBean.getAbnomalReason();
         String structChangePicurl = resultBean.getStructChangePicurl();
@@ -76,6 +70,19 @@ public class HouseImageFragment extends Fragment {
             ((View) binding.ivConstructorChange.getParent()).setVisibility(View.VISIBLE);
             VerifyGlide.getInstance().load(structChangePicurl, binding.ivConstructorChange);
             setConstructImageListener(binding.ivConstructorChange, structChangePicurl);
+        }
+    }
+
+    //设置走访图片
+    private void setImageViewsData(List<WindowImageResp.ResultBean> visitDetailList) {
+        binding.llImageContainer.removeAllViews();
+        for (WindowImageResp.ResultBean bean : visitDetailList) {
+            String imagePath = bean.getWindowPicurl();
+            String windowInfo = bean.getWindowType() + " 窗户朝向" + bean.getWindowDirection();
+            String windowDesc = TextUtils.isEmpty(bean.getWindowDesc()) ? "-" : bean.getWindowDesc();
+            new ItemImageView(imagePath, windowInfo, windowDesc, binding.llImageContainer)
+                    .setOnItemClickListener((v) ->
+                            presenter.startUpdateHouseInfoActivity(getContext(), bean));
         }
     }
 
@@ -97,7 +104,32 @@ public class HouseImageFragment extends Fragment {
     public void initRequest() {
         activity.createLoadingDialog();
         presenter = new HouseInfoPresenter();
-        presenter.requestHouseImageInfo(activity.taskInfo.getHouseId(),
+        requestWindowInfo();
+        requestWindowImage();
+    }
+
+    private void requestWindowImage() {
+        presenter.requestWindowImageInfo(activity.taskInfo.getVisiteId(),
+                new ResponseBody<WindowImageResp>(WindowImageResp.class) {
+
+                    @Override
+                    public void onFailure(String message) {
+                        IToast.toast(message);
+                    }
+
+                    @Override
+                    public void onSuccess(WindowImageResp resp) {
+                        if (isFailure(resp.getCode())) {
+                            IToast.toast(resp.getMsg());
+                            return;
+                        }
+                        setImageViewsData(resp.getResult());
+                    }
+                });
+    }
+
+    private void requestWindowInfo() {
+        presenter.requestWindowInfo(activity.taskInfo.getHouseId(),
                 activity.taskInfo.getSubtaskId(), activity.taskInfo.getHouseType(),
                 new ResponseBody<WindowInfoResp>(WindowInfoResp.class) {
                     @Override
@@ -113,13 +145,11 @@ public class HouseImageFragment extends Fragment {
                             IToast.toast(resp.getMsg());
                             return;
                         }
-                        if (resp.getResult().isEmpty()) {
-                            IToast.toast("该房间无走访信息!");
-                            return;
+                        if (!resp.getResult().isEmpty()) {
+                            //android端和web业务不同，取最新走访记录,不涉及列表,服务器端按时间降序
+                            WindowInfoResp.ResultBean latestRecord = resp.getResult().get(0);
+                            setInfoViewsData(latestRecord);
                         }
-                        //android端和web业务不同，取最新走访记录,不涉及列表,服务器端按时间降序
-                        WindowInfoResp.ResultBean latestRecord = resp.getResult().get(0);
-                        setViewsData(latestRecord);
                     }
                 });
     }

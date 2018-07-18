@@ -50,7 +50,8 @@
                 android:gravity="center"
                 android:onClick="clickCompanyInfo"
                 android:text="房屋照片"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone" />
         </LinearLayout>
 
         <include layout="@layout/common_1px_hor_line" />
@@ -71,12 +72,12 @@
             android:padding="10dp">
 
             <TextView
-                android:onClick="clickRecordWindowInfo"
                 android:id="@+id/tv_manage_house_info"
                 style="@style/style_common_center_horizontal_button"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:background="@drawable/bg_btn_blue_selector"
+                android:onClick="clickRecordWindowInfo"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
                 android:text="走访录入" />

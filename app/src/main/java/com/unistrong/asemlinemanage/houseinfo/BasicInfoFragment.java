@@ -138,23 +138,24 @@ public class BasicInfoFragment extends Fragment {
     private void requestCompanyBasicInfo() {
         activity.createLoadingDialog();
         presenter = new HouseInfoPresenter();
-        presenter.requestCompanyBasicInfo(activity.taskInfo.getHouseId(), new ResponseBody<CompanyInfoResp>(HouseInfoResp.class) {
-            @Override
-            public void onFailure(String message) {
-                activity.closeLoadingDialog();
-                IToast.toast(message);
-            }
+        presenter.requestCompanyBasicInfo(activity.taskInfo.getHouseId(),
+                new ResponseBody<CompanyInfoResp>(CompanyInfoResp.class) {
+                    @Override
+                    public void onFailure(String message) {
+                        activity.closeLoadingDialog();
+                        IToast.toast(message);
+                    }
 
-            @Override
-            public void onSuccess(CompanyInfoResp resp) {
-                activity.closeLoadingDialog();
-                if (isFailure(resp.getCode())) {
-                    IToast.toast(resp.getMsg());
-                    return;
-                }
-                setCompanyInfoViewsData(resp.getResultBean());
-            }
-        });
+                    @Override
+                    public void onSuccess(CompanyInfoResp resp) {
+                        activity.closeLoadingDialog();
+                        if (isFailure(resp.getCode())) {
+                            IToast.toast(resp.getMsg());
+                            return;
+                        }
+                        setCompanyInfoViewsData(resp.getResult().get(0));
+                    }
+                });
     }
 
     private void requestHouseBasicInfo() {

@@ -1,12 +1,25 @@
 package com.unistrong.framwork.resp;
 
+import java.util.List;
+
 /**
  * 单位基本信息响应体
  */
 public class CompanyInfoResp {
+
+    /**
+     * code : 1
+     * msg : 
+     * result : [{"houseId":"D6501055412052101292","streetNo":"650105000401","streetName":"新民东街","buildNo":"2","buildSuffixNo":"6","unitNo":"03","floorNo":"1","floorSuffixNo":"1","roomNo":"303","roomSuffixNo":"2","houseNo":"58","villageCode":"6503000000000077","villageName":"怡园小区","officeCode":"650105541700","officeName":"乌鲁木齐市公安局水磨沟区分局新兴街派出所SM-006兴惠社区便民警务站","policeCode":"650105541700","policeName":null,"communityCode":"6501059Q0515","communityName":"兴惠社区","communityManager":"王8","communityManagerTel":"18511111118","houseAddress":"新疆乌鲁木齐市水磨沟区新民东街58号","latitude":43.81427,"longtitude":87.61579,"houseQrUrl":"","houseType":"official","policeManager":"","policeManagerTel":"","houseRoomStructure":null,"houseRoomCount":"3","deptName":"腾讯","deptTelephone":"18509299259","deptLegalRepresntative":"高明","deptIndustryCategory":null,"deptEconomicNature":null,"deptCategory":null,"deptManagementLevel":"1"}]
+     * total : 6
+     * ok : true
+     */
+
     private int code;
     private String msg;
-    private ResultBean resultBean;
+    private int total;
+    private boolean ok;
+    private List<ResultBean> result;
 
     public int getCode() {
         return code;
@@ -24,15 +37,71 @@ public class CompanyInfoResp {
         this.msg = msg;
     }
 
-    public ResultBean getResultBean() {
-        return resultBean;
+    public int getTotal() {
+        return total;
     }
 
-    public void setResultBean(ResultBean resultBean) {
-        this.resultBean = resultBean;
+    public void setTotal(int total) {
+        this.total = total;
     }
 
-    public class ResultBean {
+    public boolean isOk() {
+        return ok;
+    }
+
+    public void setOk(boolean ok) {
+        this.ok = ok;
+    }
+
+    public List<ResultBean> getResult() {
+        return result;
+    }
+
+    public void setResult(List<ResultBean> result) {
+        this.result = result;
+    }
+
+    public static class ResultBean {
+        /**
+         * houseId : D6501055412052101292
+         * streetNo : 650105000401
+         * streetName : 新民东街
+         * buildNo : 2
+         * buildSuffixNo : 6
+         * unitNo : 03
+         * floorNo : 1
+         * floorSuffixNo : 1
+         * roomNo : 303
+         * roomSuffixNo : 2
+         * houseNo : 58
+         * villageCode : 6503000000000077
+         * villageName : 怡园小区
+         * officeCode : 650105541700
+         * officeName : 乌鲁木齐市公安局水磨沟区分局新兴街派出所SM-006兴惠社区便民警务站
+         * policeCode : 650105541700
+         * policeName : null
+         * communityCode : 6501059Q0515
+         * communityName : 兴惠社区
+         * communityManager : 王8
+         * communityManagerTel : 18511111118
+         * houseAddress : 新疆乌鲁木齐市水磨沟区新民东街58号
+         * latitude : 43.81427
+         * longtitude : 87.61579
+         * houseQrUrl : 
+         * houseType : official
+         * policeManager : 
+         * policeManagerTel : 
+         * houseRoomStructure : null
+         * houseRoomCount : 3
+         * deptName : 腾讯
+         * deptTelephone : 18509299259
+         * deptLegalRepresntative : 高明
+         * deptIndustryCategory : null
+         * deptEconomicNature : null
+         * deptCategory : null
+         * deptManagementLevel : 1
+         */
+
         private String houseId;
         private String streetNo;
         private String streetName;
@@ -55,6 +124,8 @@ public class CompanyInfoResp {
         private String communityManager;
         private String communityManagerTel;
         private String houseAddress;
+        private double latitude;
+        private double longtitude;
         private String houseQrUrl;
         private String houseType;
         private String policeManager;
@@ -243,6 +314,22 @@ public class CompanyInfoResp {
 
         public void setHouseAddress(String houseAddress) {
             this.houseAddress = houseAddress;
+        }
+
+        public double getLatitude() {
+            return latitude;
+        }
+
+        public void setLatitude(double latitude) {
+            this.latitude = latitude;
+        }
+
+        public double getLongtitude() {
+            return longtitude;
+        }
+
+        public void setLongtitude(double longtitude) {
+            this.longtitude = longtitude;
         }
 
         public String getHouseQrUrl() {

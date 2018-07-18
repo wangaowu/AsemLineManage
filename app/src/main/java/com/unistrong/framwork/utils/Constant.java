@@ -17,6 +17,7 @@ public class Constant {
         public static final String QUERY_COMPANY_INFO = "/office/query";
         public static final String QUERY_PERSONS_INFO = "/person/query";
         public static final String QUERY_WINDOW_INFO = "/visitInfo/query";
+        public static final String QUERY_WINDOW_IMAGE = "/visitInfo/queryVisitDetail";
         public static final String POST_WINDOW_INFO = "/visitInfo/registerData";
         public static final String UPDATE_WINDOW_INFO = "/visitInfo/update";
         public static final String QUERY_TASK_COUNT = "/subtask/getVisiteDetail";

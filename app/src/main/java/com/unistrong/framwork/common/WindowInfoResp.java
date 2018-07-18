@@ -1,6 +1,5 @@
 package com.unistrong.framwork.common;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -58,7 +57,6 @@ public class WindowInfoResp {
         private String visiteTime;
         private String visiteUser;
         private int visiteUserId;
-        private List<VisitDetailListBean> visitDetailList;
 
         public String getAbnomal() {
             return abnomal;
@@ -154,80 +152,6 @@ public class WindowInfoResp {
 
         public void setVisiteUserId(int visiteUserId) {
             this.visiteUserId = visiteUserId;
-        }
-
-        public List<VisitDetailListBean> getVisitDetailList() {
-            return visitDetailList;
-        }
-
-        public void setVisitDetailList(List<VisitDetailListBean> visitDetailList) {
-            this.visitDetailList = visitDetailList;
-        }
-
-        public static class VisitDetailListBean implements Serializable {
-            /**
-             * visitDetailId : string
-             * visitId : string
-             * windowDesc : string
-             * windowDirection : string
-             * windowPicurl : string
-             * windowType : string
-             */
-
-            private String visiteDetailId;
-            private String visiteId;
-            private String windowDesc;
-            private String windowDirection;
-            private String windowPicurl;
-            private String windowType;
-
-            public String getVisiteDetailId() {
-                return visiteDetailId;
-            }
-
-            public void setVisiteDetailId(String visiteDetailId) {
-                this.visiteDetailId = visiteDetailId;
-            }
-
-            public String getVisiteId() {
-                return visiteId;
-            }
-
-            public void setVisiteId(String visiteId) {
-                this.visiteId = visiteId;
-            }
-
-            public String getWindowDesc() {
-                return windowDesc;
-            }
-
-            public void setWindowDesc(String windowDesc) {
-                this.windowDesc = windowDesc;
-            }
-
-            public String getWindowDirection() {
-                return windowDirection;
-            }
-
-            public void setWindowDirection(String windowDirection) {
-                this.windowDirection = windowDirection;
-            }
-
-            public String getWindowPicurl() {
-                return windowPicurl;
-            }
-
-            public void setWindowPicurl(String windowPicurl) {
-                this.windowPicurl = windowPicurl;
-            }
-
-            public String getWindowType() {
-                return windowType;
-            }
-
-            public void setWindowType(String windowType) {
-                this.windowType = windowType;
-            }
         }
     }
 }

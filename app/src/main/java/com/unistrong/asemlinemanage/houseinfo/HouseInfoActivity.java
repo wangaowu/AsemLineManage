@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.unistrong.asemlinemanage.R;
 import com.unistrong.asemlinemanage.databinding.ActivityHouseInfoBinding;
+import com.unistrong.asemlinemanage.mytask.AlreadyDoingFragment;
 import com.unistrong.asemlinemanage.mytask.UndoingFragment;
 import com.unistrong.asemlinemanage.recordinfo.RecordHouseInfoActivity;
 import com.unistrong.baselibs.style.BaseActivity;
@@ -42,6 +43,7 @@ public class HouseInfoActivity extends BaseActivity {
 
         viewModel.setActivityStyle("走访信息", STATUS_BLUE);
         showRecordBtnVisible(UndoingFragment.STATUS.equals(status));
+        showHouseImageLayoutVisible(AlreadyDoingFragment.STATUS.equals(status));
         showFragmentAt(binding.tvBasicInfo);
     }
 
@@ -81,6 +83,7 @@ public class HouseInfoActivity extends BaseActivity {
     //刷新
     public void refreshHouseImageFragment() {
         showRecordBtnVisible(false);
+        showHouseImageLayoutVisible(true);
         viewModel.refreshHouseImageFragment(fragmentManager);
     }
 
@@ -88,5 +91,10 @@ public class HouseInfoActivity extends BaseActivity {
     private void showRecordBtnVisible(boolean visible) {
         View parent = (View) binding.tvManageHouseInfo.getParent();
         parent.setVisibility(visible ? View.VISIBLE : View.GONE);
+    }
+
+    //隐藏房屋照片布局
+    private void showHouseImageLayoutVisible(boolean visible) {
+        binding.tvHouseImage.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 }

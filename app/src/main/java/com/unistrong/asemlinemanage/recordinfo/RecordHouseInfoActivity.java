@@ -75,8 +75,8 @@ public class RecordHouseInfoActivity extends BaseActivity {
     private void showSelectEnterDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         String houseType = Constant.Value.TYPE_HOUSE.equals(reqInfo.getHouseType()) ? "房屋" : "单位";
-        builder.setTitle("可以进入" + houseType + "吗?");
-        builder.setSingleChoiceItems(new CharSequence[]{"可以", "不能"}, 0, (dialog_, which_) -> {
+        builder.setTitle("是否进入" + houseType + "检查");
+        builder.setSingleChoiceItems(new CharSequence[]{"是", "否"}, 0, (dialog_, which_) -> {
             if (0 == which_) {
                 reqInfo.setIsEnter("Y");
             } else {

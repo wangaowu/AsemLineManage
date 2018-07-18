@@ -6,6 +6,7 @@ import android.content.Intent;
 import com.unistrong.asemlinemanage.updateinfo.UpdateHouseInfoActivity;
 import com.unistrong.framwork.common.WindowInfoResp;
 import com.unistrong.framwork.resp.CompanyInfoResp;
+import com.unistrong.framwork.resp.WindowImageResp;
 import com.unistrong.framwork.utils.Constant;
 import com.unistrong.framwork.utils.HttpRequestImpl;
 import com.unistrong.requestlibs.response.ResponseBody;
@@ -56,14 +57,27 @@ public class HouseInfoPresenter {
         HttpRequestImpl.getInstance().requestPost(Constant.Action.QUERY_PERSONS_INFO, map, listener);
     }
 
+
     /**
-     * 请求窗户照片信息
+     * 请求窗户图片信息
+     *
+     * @param visiteId
+     * @param listener
+     */
+    public void requestWindowImageInfo(String visiteId, ResponseBody listener) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("visitId", visiteId);
+        HttpRequestImpl.getInstance().requestGet(Constant.Action.QUERY_WINDOW_IMAGE, map, listener);
+    }
+
+    /**
+     * 请求窗户走访信息
      *
      * @param houseId
      * @param subtaskId
      * @param listener
      */
-    public void requestHouseImageInfo(String houseId, String subtaskId, String houseType, ResponseBody listener) {
+    public void requestWindowInfo(String houseId, String subtaskId, String houseType, ResponseBody listener) {
         HashMap<String, String> map = new HashMap<>();
         map.put("currentPage", "1");
         map.put("pageSize", "10");
@@ -79,7 +93,7 @@ public class HouseInfoPresenter {
      * @param context
      * @param bean
      */
-    public void startUpdateHouseInfoActivity(Context context, WindowInfoResp.ResultBean.VisitDetailListBean bean) {
+    public void startUpdateHouseInfoActivity(Context context, WindowImageResp.ResultBean bean) {
         Intent intent = new Intent(context, UpdateHouseInfoActivity.class);
         intent.putExtra(UpdateHouseInfoActivity.INTENT_KEY, bean);
         context.startActivity(intent);

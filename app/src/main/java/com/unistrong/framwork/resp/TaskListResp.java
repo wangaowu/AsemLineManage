@@ -99,6 +99,7 @@ public class TaskListResp {
         private String taskStartTime;
         private String taskEndTime;
         private String taskCreateTime;
+        private String visiteId;
 
         public String getSubtaskId() {
             return subtaskId;
@@ -234,6 +235,14 @@ public class TaskListResp {
 
         public void setHouseType(String houseType) {
             this.houseType = houseType;
+        }
+
+        public String getVisiteId() {
+            return visiteId;
+        }
+
+        public void setVisiteId(String visiteId) {
+            this.visiteId = visiteId;
         }
     }
 }
