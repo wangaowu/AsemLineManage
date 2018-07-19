@@ -42,7 +42,7 @@ public class DynamicDictUtils {
     }
 
     public String[] getValueArray(List<DictResp.ResultBean> dictList) {
-        String[] result = new String[0];
+        String[] result = new String[]{"-"};
         if (dictList != null) {
             result = new String[dictList.size()];
             int index = 0;
