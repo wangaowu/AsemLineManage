@@ -84,18 +84,20 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
      */
     private void setCount(List<TaskCountResp.ResultBean> list) {
         for (TaskCountResp.ResultBean bean : list) {
-            if ("officialProceding".equals(bean.getStatus())) {
+            String status = bean.getStatus();
+            String num = String.valueOf(bean.getNum());
+            if ("officialProceding".equals(status)) {
                 //单位未完成
-                binding.tvNotVisitCompanyCount.setText("单位: " + bean.getNum());
-            } else if ("rentProceding".equals(bean.getStatus())) {
+                binding.tvNotVisitCompanyCount.setText(num);
+            } else if ("rentProceding".equals(status)) {
                 //房屋未完成
-                binding.tvNotVisitHouseCount.setText("房屋: " + bean.getNum());
-            } else if ("officialFinished".equals(bean.getStatus())) {
+                binding.tvNotVisitHouseCount.setText(num);
+            } else if ("officialFinished".equals(status)) {
                 //单位已完成
-                binding.tvVisitedCompanyCount.setText("单位: " + bean.getNum());
-            } else if ("rentFinished".equals(bean.getStatus())) {
+                binding.tvVisitedCompanyCount.setText(num);
+            } else if ("rentFinished".equals(status)) {
                 //房屋已完成
-                binding.tvVisitedHouseCount.setText("房屋: " + bean.getNum());
+                binding.tvVisitedHouseCount.setText(num);
             }
         }
     }
@@ -151,8 +153,9 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     /**
      * 打开我的任务列表界面
      *
-     * @param houseId 扫描时用
-     * @param showTag 展示标记
+     * @param houseId   扫描时用
+     * @param houseType 房屋类型
+     * @param showTag   展示标记
      */
     private void startMyTaskActivity(String houseId, String houseType, int showTag) {
         Intent intent = new Intent(this, MyTaskActivity.class);
@@ -162,25 +165,14 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         startActivity(intent);
     }
 
-    //点击已完成房屋
-    public void clickVisitedHouse(View view) {
-        startMyTaskActivity(null, Constant.Value.TYPE_HOUSE, MyTaskActivity.TAG_SHOW_ALREADY_DOING);
-    }
-
-    //点击已完成单位
-    public void clickVisitedCompany(View view) {
-        startMyTaskActivity(null, Constant.Value.TYPE_COMPANY, MyTaskActivity.TAG_SHOW_ALREADY_DOING);
-    }
-
-    //点击未完成房屋
-    public void clickNotVisitHouse(View view) {
+    //点击走访房屋
+    public void clickVisitHouse(View view) {
         startMyTaskActivity(null, Constant.Value.TYPE_HOUSE, MyTaskActivity.TAG_SHOW_UNDOING);
     }
 
-    //点击未完成单位
-    public void clickNotVisitCompany(View view) {
+    //点击走访单位
+    public void clickVisitCompany(View view) {
         startMyTaskActivity(null, Constant.Value.TYPE_COMPANY, MyTaskActivity.TAG_SHOW_UNDOING);
-
     }
 
     @Override

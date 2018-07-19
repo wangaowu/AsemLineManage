@@ -61,9 +61,8 @@ public class AlreadyDoingFragment extends Fragment implements LoadMoreListView.O
         super.onAttach(context);
         activity = (MyTaskActivity) context;
         presenter = new MyTaskPresenter(getContext());
-        requestData(currentIndex = START_INDEX);
+        onRefresh();
     }
-
 
     @Override
     public void onloadMore() {
@@ -71,12 +70,12 @@ public class AlreadyDoingFragment extends Fragment implements LoadMoreListView.O
     }
 
     private void notifyAdapterRefresh() {
-        adapter.setDatas(STATUS, datas);
+        if (adapter != null) adapter.setDatas(STATUS, datas);
     }
 
     public void requestData(int pageIndex) {
         activity.createLoadingDialog();
-        presenter.requestTaskList(STATUS, pageIndex, activity.houseId, activity.houseType, new ResponseBody<TaskListResp>(TaskListResp.class) {
+        presenter.requestTaskList(STATUS, pageIndex, activity.houseId, activity.getSelectHouseType(), new ResponseBody<TaskListResp>(TaskListResp.class) {
             @Override
             public void onFailure(String message) {
                 activity.closeLoadingDialog();
@@ -108,6 +107,7 @@ public class AlreadyDoingFragment extends Fragment implements LoadMoreListView.O
     @Override
     public void onRefresh() {
         datas.clear();
+        notifyAdapterRefresh();
         requestData(currentIndex = START_INDEX);
     }
 }

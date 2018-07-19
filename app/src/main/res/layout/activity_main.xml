@@ -73,91 +73,129 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="-40dp"
-                    android:background="@drawable/bg_roundrect_white"
                     android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/bg_roundrect_white"
+                        android:gravity="center_vertical"
+                        android:onClick="clickVisitCompany"
                         android:orientation="horizontal"
-                        android:padding="20dp"
-                        android:weightSum="2">
+                        android:padding="15dp">
 
-                        <LinearLayout
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:drawableBottom="@drawable/icon_type_company"
+                            android:drawablePadding="5dp"
+                            android:gravity="center"
+                            android:text="单位走访"
+                            android:textColor="@color/commo_text_color" />
+
+                        <Space
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:background="@drawable/bg_btn_selector"
-                            android:gravity="center_horizontal"
-                            android:orientation="vertical">
+                            android:layout_weight="1" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5dp"
-                                android:text="未走访"
-                                android:textColor="@color/textBlue"
-                                android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:text="未完成"
+                            android:textColor="@color/commo_text_color" />
 
-                            <TextView
-                                android:id="@+id/tv_not_visit_company_count"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:onClick="clickNotVisitCompany"
-                                android:paddingLeft="15dp"
-                                android:paddingRight="15dp"
-                                android:paddingTop="10dp"
-                                android:text="单位: -" />
+                        <TextView
+                            android:id="@+id/tv_not_visit_company_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="-"
+                            android:textColor="@color/global_blue"
+                            android:textSize="28sp" />
 
-                            <TextView
-                                android:id="@+id/tv_not_visit_house_count"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:onClick="clickNotVisitHouse"
-                                android:paddingLeft="15dp"
-                                android:paddingRight="15dp"
-                                android:paddingTop="10dp"
-                                android:text="房屋: -" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:text="已走访"
+                            android:textColor="@color/commo_text_color" />
 
-                        </LinearLayout>
+                        <TextView
+                            android:id="@+id/tv_visited_company_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="-"
+                            android:textColor="@color/global_blue"
+                            android:textSize="28sp" />
 
-                        <LinearLayout
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:src="@drawable/icon_right" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/bg_roundrect_white"
+                        android:gravity="center_vertical"
+                        android:onClick="clickVisitHouse"
+                        android:orientation="horizontal"
+                        android:padding="15dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:drawableBottom="@drawable/icon_type_house"
+                            android:drawablePadding="5dp"
+                            android:gravity="center"
+                            android:text="房屋走访"
+                            android:textColor="@color/commo_text_color" />
+
+                        <Space
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:background="@drawable/bg_btn_selector"
-                            android:gravity="center_horizontal"
-                            android:orientation="vertical">
+                            android:layout_weight="1" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5dp"
-                                android:text="已走访"
-                                android:textColor="@color/textBlue"
-                                android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:text="未完成"
+                            android:textColor="@color/commo_text_color" />
 
-                            <TextView
-                                android:id="@+id/tv_visited_company_count"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:onClick="clickVisitedCompany"
-                                android:paddingLeft="15dp"
-                                android:paddingRight="15dp"
-                                android:paddingTop="10dp"
-                                android:text="单位: -" />
+                        <TextView
+                            android:id="@+id/tv_not_visit_house_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="-"
+                            android:textColor="@color/global_blue"
+                            android:textSize="28sp" />
 
-                            <TextView
-                                android:id="@+id/tv_visited_house_count"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:onClick="clickVisitedHouse"
-                                android:paddingLeft="15dp"
-                                android:paddingRight="15dp"
-                                android:paddingTop="10dp"
-                                android:text="房屋: -" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:text="已走访"
+                            android:textColor="@color/commo_text_color" />
 
-                        </LinearLayout>
+                        <TextView
+                            android:id="@+id/tv_visited_house_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="-"
+                            android:textColor="@color/global_blue"
+                            android:textSize="28sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:src="@drawable/icon_right" />
                     </LinearLayout>
 
                     <RelativeLayout
@@ -167,9 +205,7 @@
                         <ImageView
                             android:layout_width="100dp"
                             android:layout_height="100dp"
-                            android:layout_alignParentBottom="true"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginBottom="100dp"
+                            android:layout_centerInParent="true"
                             android:onClick="scanAddressCode2"
                             android:scaleType="fitXY"
                             android:src="@drawable/icon_scan_code" />

@@ -61,6 +61,7 @@ public class TaskListAdapter extends BaseAdapter {
             holder.tvTaskDesc = convertView.findViewById(R.id.tv_task_desc);
             holder.tvBeginningTime = convertView.findViewById(R.id.tv_beginning_time);
             holder.tvEndTime = convertView.findViewById(R.id.tv_end_time);
+            holder.tvHistory = convertView.findViewById(R.id.tv_visit_history);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -69,8 +70,12 @@ public class TaskListAdapter extends BaseAdapter {
         //绑定录入点击事件
         holder.tvChangeStatus.setOnClickListener(v ->
                 context.startRecordHouseInfoActivity(datas.get(position)));
+        //绑定历史事件
+        holder.tvHistory.setOnClickListener(v ->
+                context.requestVisitDetail(datas.get(position)));
         //绑定item点击事件
-        convertView.setOnClickListener(v -> context.startHouseInfoActivity(datas.get(position), status));
+        convertView.setOnClickListener(v ->
+                context.startHouseInfoActivity(datas.get(position), status));
         return convertView;
     }
 
@@ -79,7 +84,8 @@ public class TaskListAdapter extends BaseAdapter {
         boolean isHouse = Constant.Value.TYPE_HOUSE.equals(bean.getHouseType());
         boolean isUndoing = UndoingFragment.STATUS.equals(status);
         holder.tvHouseType.setText(isHouse ? "房屋" : "单位");
-        holder.tvChangeStatus.setVisibility(isUndoing ? View.VISIBLE : View.INVISIBLE);
+        holder.tvChangeStatus.setVisibility(isUndoing ? View.VISIBLE : View.GONE);
+        holder.tvHistory.setVisibility(isUndoing ? View.VISIBLE : View.GONE);
         holder.tvTaskName.setText(getString(bean.getTaskName()));
         if (Constant.Value.TYPE_HOUSE.equals(bean.getHouseType())) {
             holder.tvTaskAddress.setText("房屋地址:" + getString(bean.getHouseAddress()));
@@ -103,5 +109,6 @@ public class TaskListAdapter extends BaseAdapter {
         public TextView tvBeginningTime;
         public TextView tvEndTime;
         public TextView tvTaskName;
+        public TextView tvHistory;
     }
 }

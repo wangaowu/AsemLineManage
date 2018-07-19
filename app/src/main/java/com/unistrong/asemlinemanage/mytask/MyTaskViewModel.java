@@ -89,4 +89,9 @@ public class MyTaskViewModel {
         UndoingFragment fragment = (UndoingFragment) getFragment(UndoingFragment.TAG, fragmentManager);
         fragment.initRequest();
     }
+
+    public void refreshAlreadyFragment(FragmentManager fragmentManager) {
+        AlreadyDoingFragment fragment = (AlreadyDoingFragment) getFragment(AlreadyDoingFragment.TAG, fragmentManager);
+        fragment.onRefresh();
+    }
 }

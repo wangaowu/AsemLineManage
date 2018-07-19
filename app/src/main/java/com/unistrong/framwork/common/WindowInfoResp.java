@@ -57,6 +57,7 @@ public class WindowInfoResp {
         private String visiteTime;
         private String visiteUser;
         private int visiteUserId;
+        private String isEnter;
 
         public String getAbnomal() {
             return abnomal;
@@ -152,6 +153,14 @@ public class WindowInfoResp {
 
         public void setVisiteUserId(int visiteUserId) {
             this.visiteUserId = visiteUserId;
+        }
+
+        public String getIsEnter() {
+            return isEnter;
+        }
+
+        public void setIsEnter(String isEnter) {
+            this.isEnter = isEnter;
         }
     }
 }

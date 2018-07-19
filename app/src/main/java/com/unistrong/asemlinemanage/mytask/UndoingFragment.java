@@ -81,7 +81,7 @@ public class UndoingFragment extends Fragment implements LoadMoreListView.OnLoad
 
     public void requestData(int pageIndex) {
         activity.createLoadingDialog();
-        presenter.requestTaskList(STATUS, pageIndex, activity.houseId, activity.houseType, new ResponseBody<TaskListResp>(TaskListResp.class) {
+        presenter.requestTaskList(STATUS, pageIndex, activity.houseId, activity.getSelectHouseType(), new ResponseBody<TaskListResp>(TaskListResp.class) {
             @Override
             public void onFailure(String message) {
                 activity.closeLoadingDialog();
