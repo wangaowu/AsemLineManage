@@ -63,7 +63,7 @@
                     android:gravity="center"
                     android:onClick="clickUndoing"
                     android:text="未走访"
-                    android:textStyle="bold" />
+                    android:textSize="18sp" />
 
                 <com.unistrong.baselibs.ui.UnderLineTextView
                     android:id="@+id/tv_already_doing"
@@ -74,7 +74,7 @@
                     android:gravity="center"
                     android:onClick="clickAlreadyDoing"
                     android:text="已走访"
-                    android:textStyle="bold" />
+                    android:textSize="18sp" />
 
             </LinearLayout>
 

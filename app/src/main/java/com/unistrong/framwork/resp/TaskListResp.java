@@ -80,6 +80,7 @@ public class TaskListResp {
          * taskStartTime : 2018-01-01 12:00:00.0
          * taskEndTime : 2018-01-05 12:00:00.0
          * taskCreateTime : 2018-06-11 18:46:45.0
+         * num : 0
          */
 
         private String houseType;
@@ -100,6 +101,7 @@ public class TaskListResp {
         private String taskEndTime;
         private String taskCreateTime;
         private String visiteId;
+        private String num;
 
         public String getSubtaskId() {
             return subtaskId;
@@ -243,6 +245,14 @@ public class TaskListResp {
 
         public void setVisiteId(String visiteId) {
             this.visiteId = visiteId;
+        }
+
+        public String getNum() {
+            return num;
+        }
+
+        public void setNum(String num) {
+            this.num = num;
         }
     }
 }

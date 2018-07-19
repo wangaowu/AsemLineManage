@@ -55,7 +55,6 @@ public class TaskListAdapter extends BaseAdapter {
             holder = new ViewHolder();
             convertView = View.inflate(context, R.layout.item_task_list_layout, null);
             holder.tvTaskName = convertView.findViewById(R.id.tv_task_name);
-            holder.tvHouseType = convertView.findViewById(R.id.tv_house_type);
             holder.tvChangeStatus = convertView.findViewById(R.id.tv_change_status);
             holder.tvTaskAddress = convertView.findViewById(R.id.tv_task_address);
             holder.tvTaskDesc = convertView.findViewById(R.id.tv_task_desc);
@@ -81,11 +80,14 @@ public class TaskListAdapter extends BaseAdapter {
 
     private void setItemData(int position, ViewHolder holder) {
         TaskListResp.ResultBean bean = datas.get(position);
-        boolean isHouse = Constant.Value.TYPE_HOUSE.equals(bean.getHouseType());
         boolean isUndoing = UndoingFragment.STATUS.equals(status);
-        holder.tvHouseType.setText(isHouse ? "房屋" : "单位");
         holder.tvChangeStatus.setVisibility(isUndoing ? View.VISIBLE : View.GONE);
-        holder.tvHistory.setVisibility(isUndoing ? View.VISIBLE : View.GONE);
+        if (isUndoing) {
+            boolean isEmptyHistory = "0".equals(bean.getNum()) || null == bean.getNum();
+            holder.tvHistory.setVisibility(isEmptyHistory ? View.GONE : View.VISIBLE);
+        } else {
+            holder.tvHistory.setVisibility(View.GONE);
+        }
         holder.tvTaskName.setText(getString(bean.getTaskName()));
         if (Constant.Value.TYPE_HOUSE.equals(bean.getHouseType())) {
             holder.tvTaskAddress.setText("房屋地址:" + getString(bean.getHouseAddress()));
@@ -102,7 +104,6 @@ public class TaskListAdapter extends BaseAdapter {
     }
 
     class ViewHolder {
-        public TextView tvHouseType;
         public TextView tvChangeStatus;
         public TextView tvTaskAddress;
         public TextView tvTaskDesc;

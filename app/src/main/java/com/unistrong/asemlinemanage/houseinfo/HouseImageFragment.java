@@ -130,7 +130,9 @@ public class HouseImageFragment extends Fragment {
 
     private void requestWindowInfo() {
         presenter.requestWindowInfo(activity.taskInfo.getHouseId(),
-                activity.taskInfo.getSubtaskId(), activity.taskInfo.getHouseType(),
+                activity.taskInfo.getSubtaskId(),
+                activity.taskInfo.getHouseType(),
+                activity.taskInfo.getVisiteId(),
                 new ResponseBody<WindowInfoResp>(WindowInfoResp.class) {
                     @Override
                     public void onFailure(String message) {

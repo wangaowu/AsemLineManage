@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.unistrong.asemlinemanage.updateinfo.UpdateHouseInfoActivity;
-import com.unistrong.framwork.common.WindowInfoResp;
 import com.unistrong.framwork.resp.CompanyInfoResp;
 import com.unistrong.framwork.resp.WindowImageResp;
 import com.unistrong.framwork.utils.Constant;
@@ -77,13 +76,14 @@ public class HouseInfoPresenter {
      * @param subtaskId
      * @param listener
      */
-    public void requestWindowInfo(String houseId, String subtaskId, String houseType, ResponseBody listener) {
+    public void requestWindowInfo(String houseId, String subtaskId, String houseType, String visitId, ResponseBody listener) {
         HashMap<String, String> map = new HashMap<>();
         map.put("currentPage", "1");
         map.put("pageSize", "10");
         map.put("houseId", houseId);
         map.put("subtaskId", subtaskId);
         map.put("houseType", houseType);
+        map.put("visitId", visitId);
         HttpRequestImpl.getInstance().requestPost(Constant.Action.QUERY_WINDOW_INFO, map, listener);
     }
 

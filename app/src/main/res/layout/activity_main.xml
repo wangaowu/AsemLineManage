@@ -82,14 +82,14 @@
                         android:gravity="center_vertical"
                         android:onClick="clickVisitCompany"
                         android:orientation="horizontal"
-                        android:padding="15dp">
+                        android:padding="20dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
                             android:drawableBottom="@drawable/icon_type_company"
-                            android:drawablePadding="5dp"
+                            android:drawablePadding="10dp"
                             android:gravity="center"
                             android:text="单位走访"
                             android:textColor="@color/commo_text_color" />
@@ -144,14 +144,14 @@
                         android:gravity="center_vertical"
                         android:onClick="clickVisitHouse"
                         android:orientation="horizontal"
-                        android:padding="15dp">
+                        android:padding="20dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
                             android:drawableBottom="@drawable/icon_type_house"
-                            android:drawablePadding="5dp"
+                            android:drawablePadding="10dp"
                             android:gravity="center"
                             android:text="房屋走访"
                             android:textColor="@color/commo_text_color" />

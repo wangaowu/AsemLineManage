@@ -121,8 +121,9 @@ public class MyTaskActivity extends BaseActivity {
         String houseId = bean.getHouseId();
         String subtaskId = bean.getSubtaskId();
         String houseType = bean.getHouseType();
+        String visitId = bean.getVisiteId();
         createLoadingDialog();
-        new HouseInfoPresenter().requestWindowInfo(houseId, subtaskId, houseType,
+        new HouseInfoPresenter().requestWindowInfo(houseId, subtaskId, houseType, visitId,
                 new ResponseBody<WindowInfoResp>(WindowInfoResp.class) {
                     @Override
                     public void onFailure(String message) {
