@@ -65,7 +65,6 @@ public class BasicInfoFragment extends Fragment {
 
         ItemTextView dyhView = new ItemTextView("房间数", "", binding.llPart2);
         ItemTextView xqNameView = new ItemTextView("小区名称", "", binding.llPart2);
-        ItemTextView houseCateView = new ItemTextView("房屋类别", "", binding.llPart2);
         ItemTextView detailAddressView = new ItemTextView("详细地址", "", binding.llPart2);
         ItemTextView sssqView = new ItemTextView("所属社区", "", binding.llPart2);
         ItemTextView sqgbView = new ItemTextView("社区干部", "", binding.llPart2);
@@ -86,7 +85,6 @@ public class BasicInfoFragment extends Fragment {
         setViewRightText(sqgbView, resultBean.getCommunityManager());
         setViewRightText(sqgbTeleView, resultBean.getCommunityManagerTel());
         setViewRightText(detailAddressView, resultBean.getHouseAddress());
-        setViewRightText(houseCateView, resultBean.getHouseType());
         setViewRightText(policeView, resultBean.getPoliceManager());
         setViewRightText(policeTeleView, resultBean.getPoliceManagerTel());
     }
@@ -103,7 +101,6 @@ public class BasicInfoFragment extends Fragment {
 
         ItemTextView communityNameView = new ItemTextView("小区名称", "", binding.llPart2);
         ItemTextView houseCountView = new ItemTextView("房间数", "", binding.llPart2);
-        ItemTextView houseCateView = new ItemTextView("房屋类别", "", binding.llPart2);
         ItemTextView detailAddressView = new ItemTextView("详细地址", "", binding.llPart2);
         ItemTextView sssqView = new ItemTextView("所属社区", "", binding.llPart2);
         ItemTextView sqgbView = new ItemTextView("社区干部", "", binding.llPart2);
@@ -120,7 +117,6 @@ public class BasicInfoFragment extends Fragment {
 
         setViewRightText(communityNameView, resultBean.getCommunityName());
         setViewRightText(houseCountView, resultBean.getHouseRoomCount());
-        setViewRightText(houseCateView, resultBean.getHouseType());
         setViewRightText(detailAddressView, resultBean.getHouseAddress());
         setViewRightText(sssqView, resultBean.getCommunityName());
         setViewRightText(sqgbView, resultBean.getCommunityManager());

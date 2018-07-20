@@ -7,6 +7,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.unistrong.asemlinemanage.R;
 import com.unistrong.asemlinemanage.databinding.ActivityMyTaskBinding;
@@ -146,22 +148,23 @@ public class MyTaskActivity extends BaseActivity {
     //弹出历史窗口
     private void showVisitListDialog(List<WindowInfoResp.ResultBean> historyList) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("走访历史");
-        builder.setItems(buildStringArray(historyList), null);
+        builder.setTitle("走访未入户记录");
+        builder.setView(getContentView(historyList));
         builder.create().show();
     }
 
-    private String[] buildStringArray(List<WindowInfoResp.ResultBean> historyList) {
-        String[] elements = new String[historyList.size()];
+    private LinearLayout getContentView(List<WindowInfoResp.ResultBean> historyList) {
+        LinearLayout linearLayout = new LinearLayout(this);
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
         for (int i = 0; i < historyList.size(); i++) {
-            WindowInfoResp.ResultBean bean = historyList.get(i);
-            elements[i] =
-                    "走访人:" + getString(bean.getVisiteUser()) + "\n"
-                            + "走访时间:" + getString(bean.getVisiteTime()) + "\n"
-                            + "是否入户:" + getString(bean.getIsEnter()) + "\n"
-                            + "是否异常:" + getString(bean.getAbnomal());
+            View itemLayout = View.inflate(this, R.layout.item_visit_history_layout, null);
+            TextView tvName = itemLayout.findViewById(R.id.tv_name);
+            TextView tvTime = itemLayout.findViewById(R.id.tv_time);
+            tvName.setText("走访人:" + getString(historyList.get(i).getVisiteUser()));
+            tvTime.setText("走访时间:" + getString(historyList.get(i).getVisiteTime()));
+            linearLayout.addView(itemLayout);
         }
-        return elements;
+        return linearLayout;
     }
 
     private String getString(String src) {

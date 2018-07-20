@@ -32,7 +32,7 @@
             android:drawablePadding="5dp"
             android:drawableRight="@drawable/icon_history"
             android:padding="5dp"
-            android:text="走访历史"
+            android:text="未入户记录"
             android:textColor="@color/global_blue"
             android:visibility="gone" />
     </RelativeLayout>

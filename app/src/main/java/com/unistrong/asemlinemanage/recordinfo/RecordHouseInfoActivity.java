@@ -87,6 +87,10 @@ public class RecordHouseInfoActivity extends BaseActivity {
             setRecordViewsVisible();
             dialog.dismiss();
         });
+        builder.setNegativeButton("返回", (dialog, which) -> {
+            dialog.dismiss();
+            finish();
+        });
         builder.setCancelable(false);
         builder.create().show();
     }

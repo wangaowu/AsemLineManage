@@ -77,6 +77,22 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
             binding.tvLocation.setText(province + city + district);
     }
 
+    private void setPromptText(List<TaskCountResp.ResultBean> result) {
+        binding.tvPrompt.setText("提示:当前有" + getTotal(result) + "条任务未完成");
+    }
+
+    private int getTotal(List<TaskCountResp.ResultBean> result) {
+        int total = 0;
+        for (TaskCountResp.ResultBean bean : result) {
+            String status = bean.getStatus();
+            if ("officialProceding".equals(status) || "rentProceding".equals(status)) {
+                total += bean.getNum();
+            }
+        }
+        return total;
+    }
+
+
     /**
      * 设置数量
      *
@@ -118,6 +134,7 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                             IToast.toast(resp.getMsg());
                             return;
                         }
+                        setPromptText(resp.getResult());
                         setCount(resp.getResult());
                     }
                 });
@@ -163,6 +180,11 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         intent.putExtra(MyTaskActivity.FRAGMENT_KEY, showTag);
         intent.putExtra(MyTaskActivity.HOUSE_TYPE, houseType);
         startActivity(intent);
+    }
+
+    //点击我的任务(未完成)
+    public void clickMyTask(View view) {
+        startMyTaskActivity(null, Constant.Value.TYPE_HOUSE, MyTaskActivity.TAG_SHOW_UNDOING);
     }
 
     //点击走访房屋

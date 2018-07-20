@@ -43,6 +43,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_btn_selector"
+                        android:onClick="clickMyTask"
                         android:orientation="vertical"
                         android:padding="15dp">
 
@@ -56,10 +57,11 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/tv_prompt"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="提示：今天下午你有一个新任务.."
+                            android:text="提示：当前无未完成任务"
                             android:textColor="@color/white" />
 
                     </LinearLayout>
